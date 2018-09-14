@@ -12,10 +12,13 @@ class MainPage extends Component{
                       <Link to="/Dialog">Dialog</Link>
                   </div>
                   <div>
-					  <Link to="/Frame">Frame</Link>
+					            <Link to="/Frame">Frame</Link>
                   </div>
                   <div>
                       <Link to="/NumberCard">NumberCard</Link>
+                  </div>
+                  <div>
+                      <Link to="/ExpandList">ExpandList</Link>
                   </div>
             </div>
 		)
