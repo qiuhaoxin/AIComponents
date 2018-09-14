@@ -3,7 +3,7 @@
 */
 const path=require('path');
 const cfg=require('../package.json');
-
+process.env.NODE_ENV="production";
 module.exports={
 	mode:'production',
 	entry:{
@@ -25,11 +25,22 @@ module.exports={
           },{
           	test:/\.css$/,
           	exclude:path.resolve(__dirname,'node_modules'),
-          	use:'style-loader!css-loader',
+          	use:[
+               {loader:'style-loader'},
+               {loader:'css-loader'},
+          	]
           },{
           	test:/\.less$/,
           	exclude:path.resolve(__dirname,'node_modules'),
-          	use:'style-loader!css-loader!less-loader',
+          	use:[
+               {
+               	 loader:'style-loader',
+               },{
+               	 loader:'css-loader',
+               },{
+               	 loader:'less-loader',
+               }
+          	],
           }
        ]
 	},

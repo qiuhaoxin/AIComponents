@@ -19,10 +19,30 @@ module.exports={
           	 exclude:path.resolve(__dirname,'node_modules'),
           },{
           	test:/\.css$/,
-          	use:'style-loader!css-loader',
+          	use:[
+               {
+                 loader:'style-loader',
+               },{
+                 loader:'css-loader',
+               }
+            ],
           },{
           	test:/\.less$/,
-          	use:'style-loader!css-loader!less-loader',
+          	use:[
+               {
+                 loader:'style-loader',
+               },{
+                 loader:'css-loader',
+               },{
+                 loader:'less-loader',
+               }
+            ],
+          },{
+            test:/\.(jpe?g|png|svg)$/,
+            loader:'url-loader',
+          },{
+            test:/\.(woff|woff2|eot|svg)/,
+            loader:'file-loader',
           }
 		]
 	},
