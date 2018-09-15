@@ -1,0 +1,37 @@
+.ai-tip-wrapper{
+    background-color:#E7F3FF;position:fixed;left:0;right:0;z-index:200;top:0;
+    transition:transform .1s linear;
+    &.ai-tip-show{
+        transform:translate(0,0%);
+    }
+    &.ai-tip-hide{
+        transform:translate(0,-100%);
+    }
+	& .ai-tip-tipRow{
+		font-family: PingFangSC-Regular;
+		font-size: 11px;
+		color: #AFBDCE;
+		letter-spacing: -0.27px;
+		line-height: 11px;
+		padding-top:6px;
+	    padding-left:43px;
+	    padding-bottom:12px;
+    }
+	& .ai-tip-contentRow{
+	    padding-top:12px;
+		font-family: PingFangSC-Regular;
+		font-size: 13px;
+		color: #5D6E81;
+		letter-spacing: -0.31px;
+		line-height: 13px;
+	    padding-left:25px;
+	    display:inline-flex;
+
+	    & img{
+	       width:12px;height:13px;
+	    }
+	    & .ai-tip-content{
+	       padding-left:12px;
+	    }
+	}
+}

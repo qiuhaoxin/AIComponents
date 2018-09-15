@@ -7,6 +7,7 @@ import FramePage from '../pages/Frame/index.js';
 import ExpandListPage from '../pages/ExpandList/index.js';
 
 import NumberCardPage from '../pages/NumberCard/index.js';
+import VoiceReceivePage from '../pages/VoiceReceive/index.js';
 class Router extends Component{
     constructor(props){
     	super(props);
@@ -20,6 +21,7 @@ class Router extends Component{
                 <Route path="/Frame" component={FramePage} />
                 <Route path="/NumberCard" component={NumberCardPage} />
                 <Route path="/ExpandList" component={ExpandListPage} />
+                <Route path="/VoiceReceive" component={VoiceReceivePage} />
 	          </Switch>
 	       </HashRouter>
       )

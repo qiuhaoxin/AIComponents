@@ -12,18 +12,39 @@ const prefixCls="ai-el";
 class ExpandList extends Component{
 	constructor(props){
 		super(props);
+    this.state={
+      list:props.data && props.data.list.filter((item,index)=>index<6),
+      showExpandBtn:(props.data && props.data.list && props.data.list.length>6),
+    }
 	}
+  hanldeClick=(e,item)=>{
+     const {onItemClick}=this.props;
+     onItemClick && onItemClick(item);
+  }
+  handleExpand=()=>{
+    const {data}=this.props;
+    this.setState({
+      list:data && data.list,
+      showExpandBtn:false
+    })
+  }
 	renderList=()=>{
         const {data}=this.props;
-        const listStr=data.map((item,index)=>{
-        	return <li key={`${item.id ? item.id : index}`}>
+        const {list,showExpandBtn}=this.state;
+        const listStr=list.map((item,index)=>{
+        	return <li key={`${item.id ? item.id : index}`} onClick={e=>this.hanldeClick(e,item)}>
                {item.name}
         	</li>
         })
         return (
-            <ul>
+          <div className={`${prefixCls}-content`}>
+            <ul className={`${prefixCls}-list`} ref={(el)=>this.listEl=el}>
                {listStr}
             </ul>
+            {
+              showExpandBtn ? <div className={`${prefixCls}-expand`} onClick={this.handleExpand}>展开全部</div> : null 
+            }
+          </div>  
         )
 	}
 	render(){
@@ -34,6 +55,7 @@ class ExpandList extends Component{
        ,`${prefixCls}-wrapper`);
        return (
           <div className={ClassName}>
+              {data.desc ? <div className={`${prefixCls}-desc`}></div> : null}
               {
               	this.renderList()
               }
@@ -43,7 +65,7 @@ class ExpandList extends Component{
 
 }
 ExpandList.propTypes={
-   data:PropTypes.array.isRequired,
+   data:PropTypes.object.isRequired,
    style:PropTypes.object,
    className:PropTypes.string,
 }
