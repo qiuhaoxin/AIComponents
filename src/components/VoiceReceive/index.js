@@ -17,6 +17,21 @@ class VoiceReceive extends Component{
 	renderFooter=()=>{
 
 	}
+	hanldeBtnClick=(e,key)=>{
+		console.log("key is "+key);
+		const {onCancelClick,onOkClick}=this.props;
+		switch(key){
+			case 'noHelp':
+                onCancelClick && onCancelClick();
+			break;
+			case 'help':
+                onOkClick && onOkClick();
+			break;
+			default:
+
+			break;
+		}
+	}
 	renderContent=()=>{
 		const {data}=this.props;
 
@@ -30,10 +45,10 @@ class VoiceReceive extends Component{
                     	data.btns && data.btns.length>0 ? 
                     	this.renderFooter() : 
                     	<div>
-                            <span className={`${prefixCls}-btn-left ${prefixCls}-btn`}>
+                            <span onClick={(e)=>this.hanldeBtnClick(e,'noHelp')} className={`${prefixCls}-btn-left ${prefixCls}-btn`}>
                                 没帮到我
                             </span>
-                            <span className={`${prefixCls}-btn-right ${prefixCls}-btn`}>
+                            <span onClick={(e)=>this.hanldeBtnClick(e,'help')} className={`${prefixCls}-btn-right ${prefixCls}-btn`}>
                                  很好
                             </span>
                     	</div>
@@ -60,5 +75,13 @@ class VoiceReceive extends Component{
           </div>
 		)
 	}
+}
+VoiceReceive.defaultProps={
+    onCancelClick:null,
+    onOkClick:null,
+}
+VoiceReceive.propTypes={
+	onCancelClick:PropTypes.func,
+	onOkClick:PropTypes.func,
 }
 export default VoiceReceive;

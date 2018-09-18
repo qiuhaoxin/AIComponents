@@ -20,7 +20,7 @@ class RecommendCard extends Component{
 	}
 	handleItemClick=(e,item)=>{
 		const {onItemClick}=this.props;
-		delete item.imagePath;
+		delete item.ficonpath;
         onItemClick && onItemClick(item);
 	}
     renderAPPList=()=>{
@@ -29,14 +29,14 @@ class RecommendCard extends Component{
     	const appListStr=data.map(item=>{
     		return <li key={item.id} onClick={(e)=>this.handleItemClick(e,item)}>
                 <div className={`${prefixCls}-list-left`}>
-                    <img src={item.imagePath}/>
+                    <img src={item.ficonpath}/>
                 </div>
                 <div className={`${prefixCls}-list-right`}>
-                    <div>
-                        {item.name}
+                    <div className={`${prefixCls}-name`}>
+                        {item.ftitle}
                     </div>
-                    <div>
-                        {item.desc}
+                    <div className={`${prefixCls}-desc`}>
+                        {item.ftips}
                     </div>
                 </div>
     		</li>
@@ -59,14 +59,19 @@ class RecommendCard extends Component{
         )
     }
 	render(){
-		const {className,style}=this.props;
+		const {className,style,desc}=this.props;
 		const classNames=ClassNames({
 			[`${className}`]:className,
 		},`${prefixCls}-wrapper`)
 		return (
            <div style={style} className={classNames}>
-               {this.renderAPPList()}
-               {this.renderFooter()}
+               {
+                  desc ? <div className={`${prefixCls}-description`}>{desc}</div> : null
+               }
+               <div className={`${prefixCls}-box`}>
+                 {this.renderAPPList()}
+                 {this.renderFooter()}
+               </div>
            </div>
 		)
 	}

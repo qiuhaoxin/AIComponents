@@ -11,6 +11,8 @@ export {default as ExpandList} from './components/ExpandList';
 
 export {default as Tip} from './components/Tip';
 
-// export {default as Frame} from './components/Frame';
+export {default as Frame} from './components/Frame';
 
 export {default as VoiceReceive} from './components/VoiceReceive';
+
+export {default as TypeIn} from './components/TypeIn';

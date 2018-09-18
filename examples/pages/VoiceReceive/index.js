@@ -14,10 +14,16 @@ class VoiceReceivePage extends Component{
 
 		}
 	}
+	handleCancelClick=()=>{
+        console.log("onCancelClick");
+	}
+	handleOkClick=()=>{
+        console.log("onOkClick");
+	}
 	render(){
         return (
            <div>
-               <VoiceReceive data={this.data} className={`ai-vr-demo`}>
+               <VoiceReceive data={this.data} className={`ai-vr-demo`} onOkClick={this.handleOkClick} onCancelClick={this.handleCancelClick}>
 
                </VoiceReceive>
            </div>
