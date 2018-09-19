@@ -23,7 +23,6 @@ class Tip extends Component{
         [`${prefixCls}-show`]:visible,
         [`${prefixCls}-hide`]:!visible,
       },`${prefixCls}-wrapper`)
-      console.log("classNames is "+classNames);
    	  return (
         <div style={style} className={classNames} onClick={this.handleClick}>
             <div className={`${prefixCls}-contentRow`}>
@@ -39,7 +38,7 @@ class Tip extends Component{
    	  )
    }
 }
-Tip.defaultProps={
+Tip.defaultProps={  
    tipStr:'点击或说出"填写出差申请"即可继续',
    visible:false,
    data:{},
@@ -47,6 +46,6 @@ Tip.defaultProps={
 Tip.propTypes={
    tipStr:PropTypes.string,
    visible:PropTypes.bool,
-   data:PropTypes.object
+   data:PropTypes.object  
 }
 export default Tip;

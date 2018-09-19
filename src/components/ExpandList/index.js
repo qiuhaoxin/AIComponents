@@ -32,8 +32,8 @@ class ExpandList extends Component{
         const {data}=this.props;
         const {list,showExpandBtn}=this.state;
         const listStr=list.map((item,index)=>{
-        	return <li key={`${item.id ? item.id : index}`} onClick={e=>this.hanldeClick(e,item)}>
-               {item.name}
+        	return <li key={`${item.value ? item.value : index}`} onClick={e=>this.hanldeClick(e,item)}>
+               {item.desc}
         	</li>
         })
         return (

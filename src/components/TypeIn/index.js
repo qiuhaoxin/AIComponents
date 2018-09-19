@@ -21,9 +21,10 @@ class TypeIn extends Component{
             return (<div className={Styles.footer}><div>{onEditStr}</div></div>)
     		}else if(onEdit && onSubmit){
     		   const style={width:'50%',boxSizing:'border-box'};
-               return (<div className={Styles.footer}><div className={Styles.left} style={style} onClick={onEdit}>{onEditStr}</div><div className={Styles.right} onClick={onSubmit} style={style}>{onSubmitStr}</div></div>)
+               return (<div className={`${prefixCls}-footer`}><span className={`${prefixCls}-left`} onClick={onEdit}>{onEditStr}</span>
+               	<span className={`${prefixCls}-right`} onClick={onSubmit}>{onSubmitStr}</span></div>)
     		}else if(!onEdit && onSubmit){
-    			return <div className={Styles.footer}><div>{onSubmitStr}</div></div>
+    			return <div className={`${prefixCls}-footer`}><div>{onSubmitStr}</div></div>
     		}
     	}else if(footer){
             return <div className={`${prefixCls}-footer`}>{footer}</div>
@@ -32,7 +33,7 @@ class TypeIn extends Component{
     	}
     }
 	render(){
-		const {style,className,title,visible,content,children}=this.props;
+		const {style,className,title,visible,content,children,say,kdIntention}=this.props;
 		const wrapperCls=`${prefixCls}-dialog`;
 		const ClassName=ClassNames({
             [`${className}`]:!!className,
@@ -44,19 +45,22 @@ class TypeIn extends Component{
 		}
 		return (
           <div className={`${ClassName}`}>
-            <div className={`${wrapperCls}`} style={wrapperStyle}>
-                <div className={`${prefixCls}-inner`}>
-                   <div className={`${prefixCls}-header ${title!=DIALOG_TITLE ? 'title_fill' : ''}`}>
-                        {title}
-                   </div>
-                   <div className={`${prefixCls}-content`}>
-                        {typeof content=='function' ? content() : content}
-                   </div>
-                   {this.renderFooter()}
-                </div>
-            </div>
             {
-                children ? children() : null
+               kdIntention==null ? null 
+               :<div className={`${wrapperCls}`} style={wrapperStyle}>
+	                <div className={`${prefixCls}-inner`}>
+	                   <div className={`${prefixCls}-header ${title!=DIALOG_TITLE ? 'title_fill' : ''}`}>
+	                        {title}
+	                   </div>
+	                   <div className={`${prefixCls}-content`}>
+	                        {typeof content=='function' ? content() : content}
+	                   </div>
+	                   {this.renderFooter()}
+	                </div>
+                </div> 
+            }
+            {
+                say ? <div className={`${prefixCls}-say`}>{say}</div> : null
             }
           </div>
 		)

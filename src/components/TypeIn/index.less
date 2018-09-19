@@ -1,40 +1,40 @@
 .ai-ti-wrapper{
-  margin-bottom:41px;
   & .ai-ti-dialog{
   display:flex;box-shadow: 0 2px 8px 0 #D6E2EF;border-radius: 10px;
   & .ai-ti-inner{
-      padding:24px 24px 0 24px;font-family: PingFangSC-Regular;font-size: 32px;color: #666;line-height:44px;width:100%;position:relative;color:#999;
+      padding:12px 12px 0 12px;font-family: PingFangSC-Regular;font-size: 16px;color: #666;line-height:22px;width:100%;position:relative;color:#999;
         & .ai-ti-header{
-          position:relative;padding-bottom:24.2px;
+          position:relative;padding-bottom:12px;padding-left:4px;
           &:before{
-            content:'';position:absolute;left:0px;right:0px;height:1px;background-color:#e5e5e5;bottom:0;
+            content:'';position:absolute;left:-10px;right:-10px;height:1px;background-color:#e5e5e5;bottom:0;
           }
         }
         & .title_fill{
             color:#333;
         }
         & .ai-ti-content{
-           padding-top:7.8px;padding-bottom:31px;
+           padding-top:4px;padding-bottom:16px;padding-left:4px;
         }
-        & .footer{
-           width:100%;display:flex;flex-direction:row;position:relative;align-items:center;justify-content:center;
+        & .ai-ti-footer{
+           display:flex;flex-direction:row;position:relative;align-items:center;justify-content:flex-end;padding-top:10px;padding-bottom:9.5px;
+           font-family: PingFangSC-Regular;padding-right:4px;
            &:before{
-              content:'';position:absolute;top:0;height:1px;background-color:#e5e5e5;left:-24px;right:-24px;transform:scaleY(.5);
+              content:'';position:absolute;top:0;height:1px;background-color:#e5e5e5;left:-12px;right:-12px;transform:scaleY(.5);
            }
-           & > div{
-               display:inline-flex;justify-content:center;align-items:center;padding:18px;
-               &.left{
-                  color:#666;
+           & > span{
+               padding:8px 14px;border-radius: 15px;font-size:14px;
+               &.ai-ti-left{
+                  color: #333;text-align: center;line-height: 14px;border: 1px solid #E5E5E5;
                }
-               &.right{
-                  color:#4598F0;position:relative;
-                  &:before{
-                     content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background-color:#e5e5e5;
-                  }
+               &.ai-ti-right{
+                  position:relative;font-size: 14px;color: #FFF;text-align: center;line-height: 14px;background: #4598F0;margin-left:12px;
                }
            }
         }
   }
-
 }
+   & .ai-ti-say{
+      width:100%;
+      margin-top:16px;color:#333;
+   }
 }

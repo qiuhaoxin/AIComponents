@@ -47,35 +47,37 @@ class DialogPage extends Component{
 	    return (
 	       <div className={'dialogContent'}>
 	           <div className={`dialogContent-left`}>
-	               <div className={`'loc' ${b_loc!=SOURCE_ADDRESS ? 'loc_fill' : ''}`}>{b_loc}</div>
-	               <div className={`'loc' ${b_loc!=TARGET_ADDRESS ? 'loc_fill' : ''}`}>{e_loc}</div>
+	               <div className={`loc ${b_loc!=SOURCE_ADDRESS ? 'loc_fill' : ''}`}>{b_loc}</div>
+	               <div className={`loc ${b_loc!=TARGET_ADDRESS ? 'loc_fill' : ''}`}>{e_loc}</div>
 	           </div>
 	           <div className={'dialogContent-right'}>
-	               <div className={`'time' ${b_t!=BEGIN_TIME ? 'time_fill' : ''}`}>{b_t}</div>
-	               <div className={`'time' ${b_t!=BACK_TIME ? 'time_fill' : ''}`}>{e_t}</div>
+	               <div className={`time ${b_t!=BEGIN_TIME ? 'time_fill' : ''}`}>{b_t}</div>
+	               <div className={`time ${b_t!=BACK_TIME ? 'time_fill' : ''}`}>{e_t}</div>
 	           </div>
 	       </div>
 	    )
   }
 	handleDialogSubmit=(item)=>{
-	     const url=item && item['url'];
-	     const urlStr=url && url['url'];
-	     const {dialogList}=this.state;
-	     if(urlStr){
-	        saveInLocalStorage('dialog',dialogList);
-	        location.href=urlStr;
-	     }
+		console.log("submit");
+	     // const url=item && item['url'];
+	     // const urlStr=url && url['url'];
+	     // const {dialogList}=this.state;
+	     // if(urlStr){
+	     //    saveInLocalStorage('dialog',dialogList);
+	     //    location.href=urlStr;
+	     // }
 	}
 	handleDialogEdit=(item)=>{
-		const url=item && item['url'];
-	     const urlStr=url && url['url'];
-	     const {dialogList}=this.state;
-	     const {sessionId}=this.props;
-	     if(urlStr){
-	        saveInLocalStorage('dialog',dialogList);//保存该次的会话记录
-	        saveInLocalStorage('sessionId',sessionId);
-	        location.href=urlStr;
-	    }
+		console.log("edit");
+		// const url=item && item['url'];
+	 //     const urlStr=url && url['url'];
+	 //     const {dialogList}=this.state;
+	 //     const {sessionId}=this.props;
+	 //     if(urlStr){
+	 //        saveInLocalStorage('dialog',dialogList);//保存该次的会话记录
+	 //        saveInLocalStorage('sessionId',sessionId);
+	 //        location.href=urlStr;
+	 //    }
 	}
 	render(){
 		const item={
@@ -85,11 +87,11 @@ class DialogPage extends Component{
 			"say":"您什么时候回来呢？","score":0,"sessionId":"3cd9d602-c688-488c-9b9b-dd326711b1e3","status":"clarify"},"type":"TEXT"
 		}
 		const kdIntention=item['kdIntention'];
-		const reason="您什么时候回来呢？";
+		const reason="";
 		return (
             <div>
-              <TypeIn title={reason ? reason : DIALOG_TITLE} className={`${'dialog'}`} content={()=>this.handleDialogContent(kdIntention['kdWordslots'])} 
-                onSubmit={item.type=='URL' ? ()=>this.handleDialogSubmit(item) : null} onEdit={item.type=='URL' ? ()=>this.handleDialogEdit(item) : null}>
+              <TypeIn title={reason ? reason : DIALOG_TITLE} className={`ai-ti-demo`} say="您什么时候回来呢？" content={()=>this.handleDialogContent(kdIntention['kdWordslots'])} 
+                >
                {item.type=='URL' ? this[urlMapping[kdIntention['intention']]] : null}
               </TypeIn>
             </div>
@@ -100,4 +102,5 @@ export default DialogPage;
 
 /*
 * <RecommendCard data={this.data} className={'ai-rc-card'} desc={'请问我能帮您做点什么?'}></RecommendCard>
+onSubmit={()=>this.handleDialogSubmit(item)} onEdit={()=>this.handleDialogEdit(item)}
 */
