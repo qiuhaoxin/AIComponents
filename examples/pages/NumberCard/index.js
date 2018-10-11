@@ -23,6 +23,11 @@ class NumberCardPage extends Component{
                {item:'环比',value:'+60%'},
 			]
 		}
+		this.data2={
+			desc:"您好 以下是济南分公司2019年9月份回款",
+			detail:[{"item":"同比","value":"142.86%"}],
+			value:'3000.3万',
+			title:"济南分公司"}
 	}
 	render(){
 		return (
@@ -32,6 +37,10 @@ class NumberCardPage extends Component{
                </NumberCard>
 
                <NumberCard data={this.data1} className={'ai-nc-demo1'}>
+
+               </NumberCard>
+
+                <NumberCard data={this.data2} className={'ai-nc-demo1'}>
 
                </NumberCard>
             </div>

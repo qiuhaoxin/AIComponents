@@ -16,31 +16,40 @@ import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import './index.less';
+import {fromJS,is} from 'immutable';
 const prefixCls="ai-nc";
 class NumberCard extends Component{
 	constructor(props){
 		super(props);
 	}
+  shouldComponentUpdate(nextProps,nextState){
+      return !is(fromJS(nextProps),fromJS(this.props)) || !is(fromJS(nextState),fromJS(this.state));
+  }
 	renderDetailOne=()=>{
 	   const {data}=this.props;
        return (
          <div className={`${prefixCls}-content ${prefixCls}-row`}>
-             <div>
-                <div className={`${prefixCls}-content-title`}>
-		            {data.title}
-		        </div>
-		        <div className={`${prefixCls}-content-value`}>
-		            {data.value}
-		        </div>
-             </div>
-             <div className={`${prefixCls}-right`}>
-	            <div className={`${prefixCls}-detail-value`}>
-	               {data.detail[0].value}
-	            </div>
-	            <div className={`${prefixCls}-detail-item`}>
-	               {data.detail[0].item}
-	            </div>
-	          </div>
+            <div className={`${prefixCls}-left`}>
+               <div>
+                  <div className={`${prefixCls}-content-title`}>
+  		                {data.title}
+  		            </div>
+               </div>   
+  		         <div className={`${prefixCls}-content-value`}>
+  		            {data.value}
+  		         </div>
+            </div>
+            {
+                data.detail ? 
+                <div className={`${prefixCls}-right`}>
+                  <div className={`${prefixCls}-detail-value`}>
+                     {data.detail[0].value}
+                  </div>
+                  <div className={`${prefixCls}-detail-item`}>
+                     {data.detail[0].item}
+                  </div>
+                </div> : null
+            }
          </div>
        )
     }
@@ -67,6 +76,7 @@ class NumberCard extends Component{
         )
     }
 	render(){
+    console.log("render is NumberCard");
 		const {className,style,selfStr,data}=this.props;
 		const classNames=ClassNames({
             [`${className}`]:className,

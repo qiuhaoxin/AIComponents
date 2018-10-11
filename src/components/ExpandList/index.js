@@ -7,6 +7,7 @@ import React,{Component} from 'react';
 import ClassNames from 'classnames';
 import './index.less';
 import PropTypes from 'prop-types';
+import {fromJS,is} from 'immutable';
 
 const prefixCls="ai-el";
 class ExpandList extends Component{
@@ -17,6 +18,9 @@ class ExpandList extends Component{
       showExpandBtn:(props.data && props.data.list && props.data.list.length>6),
     }
 	}
+  shouldComponentUpdate(nextProps,nextState){
+      return !is(fromJS(nextProps),fromJS(this.props)) || !is(fromJS(nextState),fromJS(this.state));
+  }
   hanldeClick=(e,item)=>{
      const {onItemClick}=this.props;
      onItemClick && onItemClick(item);
@@ -48,6 +52,7 @@ class ExpandList extends Component{
         )
 	}
 	render(){
+       console.log("render in ExpandList");
        const {className,style,data}=this.props;
        const ClassName=ClassNames({
            [`${className}`]:className,
@@ -55,7 +60,7 @@ class ExpandList extends Component{
        ,`${prefixCls}-wrapper`);
        return (
           <div className={ClassName}>
-              {data.desc ? <div className={`${prefixCls}-desc`}></div> : null}
+              {data.desc ? <div className={`${prefixCls}-desc`}>{data.desc}</div> : null}
               {
               	this.renderList()
               }

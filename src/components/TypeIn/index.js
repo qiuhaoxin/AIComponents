@@ -7,6 +7,7 @@ import React,{Component} from 'react';
 import Styles from './index.less';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
+import {fromJS,is} from 'immutable';
 
 const DIALOG_TITLE="这里是标题";
 const prefixCls='ai-ti';
@@ -14,7 +15,10 @@ class TypeIn extends Component{
 	constructor(props){
 		super(props);
 	}
-    renderFooter=()=>{
+  shouldComponentUpdate(nextProps,nextState){
+    return !is(fromJS(nextProps),fromJS(this.props));
+  }
+  renderFooter=()=>{
     	const {footer,onEdit,onSubmit,onEditStr,onSubmitStr}=this.props;
     	if(!footer){
     		if(onEdit && !onSubmit){
@@ -31,8 +35,9 @@ class TypeIn extends Component{
     	}else{
     		return null;
     	}
-    }
+  }
 	render(){
+    console.log("render is TypeIn");
 		const {style,className,title,visible,content,children,say,kdIntention}=this.props;
 		const wrapperCls=`${prefixCls}-dialog`;
 		const ClassName=ClassNames({

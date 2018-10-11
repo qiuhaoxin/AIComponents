@@ -8,12 +8,16 @@ import React,{Component} from 'react';
 import './index.less';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
+import {fromJS,is} from 'immutable';
 
 const prefixCls='ai-frame';
 class Frame extends Component{
 	constructor(props){
 		super(props);
 	}
+  shouldComponentUpdate(nextProps,nextState){
+      return !is(fromJS(nextProps),fromJS(this.props)) || !is(fromJS(nextState),fromJS(this.state));
+  }
 	render(){
 	   const {className,style}=this.props;
 	   const ClassName=ClassNames({

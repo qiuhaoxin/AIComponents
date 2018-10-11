@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import './index.less';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-
+import {fromJS,is} from 'immutable';
 
 const prefixCls='ai-tip';
 class Tip extends Component{
@@ -11,6 +11,9 @@ class Tip extends Component{
    }
    state={
 
+   }
+   shouldComponentUpdate(nextProps,nextState){
+      return !is(fromJS(nextProps),fromJS(this.props)) || !is(fromJS(nextState),fromJS(this.state));
    }
    handleClick=()=>{
    	  const {onClick,data}=this.props;

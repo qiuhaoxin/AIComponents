@@ -90,6 +90,7 @@ class DialogPage extends Component{
 		const reason="";
 		return (
             <div>
+              <RecommendCard data={this.data} className={'ai-rc-card'} desc={'请问我能帮您做点什么?'}></RecommendCard>
               <TypeIn title={reason ? reason : DIALOG_TITLE} className={`ai-ti-demo`} say="您什么时候回来呢？" content={()=>this.handleDialogContent(kdIntention['kdWordslots'])} 
                 >
                {item.type=='URL' ? this[urlMapping[kdIntention['intention']]] : null}

@@ -16,3 +16,5 @@ export {default as Frame} from './components/Frame';
 export {default as VoiceReceive} from './components/VoiceReceive';
 
 export {default as TypeIn} from './components/TypeIn';
+
+export {default as Iscroll} from './components/Iscroll';

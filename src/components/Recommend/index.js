@@ -7,12 +7,16 @@ import React,{Component} from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import './index.less';
+import {fromJS,is} from 'immutable';
 
 const prefixCls="ai-rc";
 class RecommendCard extends Component{
 	constructor(props){
 		super(props);
 	}
+  shouldComponentUpdate(nextProps,nextState){
+      return !is(fromJS(nextProps),fromJS(this.props)) || !is(fromJS(nextState),fromJS(this.state));
+  }
 	handleClickBtn=(e)=>{
        const {onBtnClick}=this.props;
 
@@ -26,8 +30,8 @@ class RecommendCard extends Component{
     renderAPPList=()=>{
     	const {data}=this.props;
     	const appListClass=ClassNames(`${prefixCls}-list`);
-    	const appListStr=data.map(item=>{
-    		return <li key={item.id} onClick={(e)=>this.handleItemClick(e,item)}>
+    	const appListStr=data.map((item,index)=>{
+    		return <li key={item.id || item.fid || index} onClick={(e)=>this.handleItemClick(e,item)}>
                 <div className={`${prefixCls}-list-left`}>
                     <img src={item.ficonpath}/>
                 </div>
@@ -59,6 +63,7 @@ class RecommendCard extends Component{
         )
     }
 	render(){
+    console.log("RecommendCard render!");
 		const {className,style,desc}=this.props;
 		const classNames=ClassNames({
 			[`${className}`]:className,

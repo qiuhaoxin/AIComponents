@@ -59,6 +59,12 @@ module.exports={
 			commonjs2:'react-dom',
 			amd:'react-dom',
 			root:'ReactDOM',
-		}
+		},
+    'immutable':{
+      commonjs2:'immutable',
+      commonjs:'immutable',
+      amd:'immutable',
+      root:'immutable',
+    }
 	}
 }

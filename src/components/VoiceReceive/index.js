@@ -8,6 +8,7 @@ import React,{Component} from 'react';
 import './index.less';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
+import {fromJS,is} from 'immutable';
 
 const prefixCls="ai-vr";
 class VoiceReceive extends Component{
@@ -16,6 +17,9 @@ class VoiceReceive extends Component{
 	}
 	renderFooter=()=>{
 
+	}
+	shouldComponentUpdate(nextProps,nextState){
+       return !is(fromJS(nextProps),fromJS(this.props)) || !is(fromJS(nextState),fromJS(this.state));
 	}
 	hanldeBtnClick=(e,key)=>{
 		console.log("key is "+key);
@@ -34,7 +38,7 @@ class VoiceReceive extends Component{
 	}
 	renderContent=()=>{
 		const {data}=this.props;
-
+        
 		return (
            <div className={`${prefixCls}-content`}>
                 <div className={`${prefixCls}-title`}>
@@ -58,6 +62,7 @@ class VoiceReceive extends Component{
 		)
 	}
 	render(){
+		console.log("render in VoiceReceive");
 		const {className,style}=this.props;
 		const classNames=ClassNames({
 			[`${className}`]:!!className,

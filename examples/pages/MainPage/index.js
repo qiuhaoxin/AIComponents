@@ -20,6 +20,12 @@ class MainPage extends Component{
                   <div>
                       <Link to="/ExpandList">ExpandList</Link>
                   </div>
+                  <div>
+                      <Link to="/VoiceReceive">VoiceReceive</Link>
+                  </div>
+                  <div>
+                      <Link to="/Iscroll">Iscroll</Link>
+                  </div>
             </div>
 		)
 	}
