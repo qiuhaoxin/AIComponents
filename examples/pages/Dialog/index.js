@@ -84,14 +84,16 @@ class DialogPage extends Component{
 			className:"chatbot-dialog","text":"您什么时候回来呢？",id:2,"kdIntention":{"intention":"BUS_TRIP","intentionName":"出差申请",
 			"kdWordslots":[{"normalizedWord":"2018-09-19","number":"user_b_t","originalWord":"明天","score":0,"wordslotType":"2"},
 			{"normalizedWord":"北京","number":"user_e_l","originalWord":"北京","score":0,"wordslotType":"location"}],
-			"say":"您什么时候回来呢？","score":0,"sessionId":"3cd9d602-c688-488c-9b9b-dd326711b1e3","status":"clarify"},"type":"TEXT"
+			"say":"您什么时候回来呢？","score":0,"sessionId":"3cd9d602-c688-488c-9b9b-dd326711b1e3","status":"confirm"},"type":"TEXT"
 		}
 		const kdIntention=item['kdIntention'];
 		const reason="";
 		return (
             <div>
-              <RecommendCard data={this.data} className={'ai-rc-card'} desc={'请问我能帮您做点什么?'}></RecommendCard>
-              <TypeIn title={reason ? reason : DIALOG_TITLE} className={`ai-ti-demo`} say="您什么时候回来呢？" content={()=>this.handleDialogContent(kdIntention['kdWordslots'])} 
+       
+              <TypeIn title={reason ? reason : DIALOG_TITLE} className={`ai-ti-demo`} say="您什么时候回来呢？" kdIntention={kdIntention}
+                   content={()=>this.handleDialogContent(kdIntention['kdWordslots'])} 
+                   onSubmit={kdIntention.status=='confirm' ? ()=>this.handleDialogSubmit(item) : null}
                 >
                {item.type=='URL' ? this[urlMapping[kdIntention['intention']]] : null}
               </TypeIn>
@@ -102,6 +104,5 @@ class DialogPage extends Component{
 export default DialogPage;
 
 /*
-* <RecommendCard data={this.data} className={'ai-rc-card'} desc={'请问我能帮您做点什么?'}></RecommendCard>
-onSubmit={()=>this.handleDialogSubmit(item)} onEdit={()=>this.handleDialogEdit(item)}
+*        <RecommendCard data={this.data} className={'ai-rc-card'} desc={'请问我能帮您做点什么?'}></RecommendCard>
 */

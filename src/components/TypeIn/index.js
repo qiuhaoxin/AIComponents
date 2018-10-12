@@ -28,7 +28,7 @@ class TypeIn extends Component{
                return (<div className={`${prefixCls}-footer`}><span className={`${prefixCls}-left`} onClick={onEdit}>{onEditStr}</span>
                	<span className={`${prefixCls}-right`} onClick={onSubmit}>{onSubmitStr}</span></div>)
     		}else if(!onEdit && onSubmit){
-    			return <div className={`${prefixCls}-footer`}><div>{onSubmitStr}</div></div>
+    			return <div className={`${prefixCls}-footer`}> <span className={`${prefixCls}-right`} onClick={onSubmit}>{onSubmitStr}</span></div>
     		}
     	}else if(footer){
             return <div className={`${prefixCls}-footer`}>{footer}</div>
@@ -37,7 +37,6 @@ class TypeIn extends Component{
     	}
   }
 	render(){
-    console.log("render is TypeIn");
 		const {style,className,title,visible,content,children,say,kdIntention}=this.props;
 		const wrapperCls=`${prefixCls}-dialog`;
 		const ClassName=ClassNames({

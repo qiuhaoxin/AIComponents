@@ -253,7 +253,7 @@ var utils = (function () {
 		e.target.dispatchEvent(ev);
 	};
 
-	me.click = function (e) {
+	me.click = function (e) { 
 		var target = e.target,
 			ev;
 
