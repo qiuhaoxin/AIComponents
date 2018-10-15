@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.less';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import IScroll from './iscroll';
+//import IScroll from './iscroll';
+import NewIScroll from './newiscroll';
 
 const iScrollEvents=[
    'beforeScrollStart','scrollCancel','scrollStart',
@@ -28,7 +29,7 @@ class Iscroll extends Component{
 	initIscroll=()=>{
 	   // const {iScroll,options}=this.props;
 	    const options={};
-	    const iScrollInstance=new IScroll(ReactDOM.findDOMNode(this),options);
+	    const iScrollInstance=new NewIScroll(ReactDOM.findDOMNode(this),options);
 	    this.iScrollInstance=iScrollInstance;
 	}
 	//销毁

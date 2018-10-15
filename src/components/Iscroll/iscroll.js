@@ -518,7 +518,7 @@ IScroll.prototype = {
 		}
 
 		// If you are scrolling in one direction lock the other
-		if ( !this.directionLocked && !this.options.freeScroll ) {
+		if ( !this.directionLocked && !this.options.freeScroll) {
 			if ( absDistX > absDistY + this.options.directionLockThreshold ) {
 				this.directionLocked = 'h';		// lock horizontally
 			} else if ( absDistY >= absDistX + this.options.directionLockThreshold ) {
@@ -535,7 +535,6 @@ IScroll.prototype = {
 				this.initiated = false;
 				return;
 			}
-
 			deltaY = 0;
 		} else if ( this.directionLocked == 'v' ) {
 			if ( this.options.eventPassthrough == 'horizontal' ) {
@@ -573,7 +572,7 @@ IScroll.prototype = {
 
 		this._translate(newX, newY);
 
-/* REPLACE START: _move */
+/* REPLACE START: _move */  
 
 		if ( timestamp - this.startTime > 300 ) {
 			this.startTime = timestamp;
@@ -713,7 +712,6 @@ IScroll.prototype = {
 
 		var rect = utils.getRect(this.scroller);
 /* REPLACE START: refresh */
-
 		this.scrollerWidth	= rect.width;
 		this.scrollerHeight	= rect.height;
 

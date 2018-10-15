@@ -25,7 +25,7 @@
           if(_vendor==='')return style;
           return _vendor + style.chatAt(0).toUpperCase() + style.substr(1);
        }
-       me.getTime=Date.now() || function(){return new Date().getTime()};
+       me.getTime=Date.now || function(){return new Date().getTime()};
        me.extend=function(target,obj){
        	  for(var i in obj){
        	  	 target[i]=obj[i];
@@ -69,6 +69,7 @@
 	   	  hasTransform:_transform!==false,
 	   	  hasTouch:'ontouchstart' in window,
 	   	  hasPerspective:_prefixStyle('perspective') in _elementStyle,
+        hasPointer:!!(window.PointerEvent || window.MSPointerEvent),
 	   	  hasTransition:_prefixStyle('transition') in _elementStyle,
 	   })
 
@@ -132,7 +133,7 @@
 		}
 		me.offset=function(el){
             var left=-el.offsetLeft,
-                top=-e..offsetTop;
+                top=-e.offsetTop;
             while(el=el.offsetParent){
                 left-=el.offsetLeft;
                 top-=el.offsetTop;  
@@ -222,6 +223,7 @@
       this.scrollerStyle=this.scroller.style;
 
       this.options={
+          disablePointer:!utils.hasPointer,
       	  disableTouch:!utils.hasTouch,
       	  startX:0,
       	  startY:0,
@@ -235,12 +237,49 @@
 
       	  useTransition:true,
       	  useTransform:true,
+          freeScroll
 
       }
       for(var i in options){
       	 this.options[i]=options[i];
       }
 
+      this.options.freeScroll=this.options.freeScroll;
+
+      this.translateZ = this.options.HWCompositing && utils.hasPerspective ? ' translateZ(0)' : '';
+
+      this.options.useTransition = utils.hasTransition && this.options.useTransition;
+      this.options.useTransform = utils.hasTransform && this.options.useTransform;
+
+      this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
+      this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
+
+      // If you want eventPassthrough I have to lock one of the axes
+      this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
+      this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
+
+      this.options.resizePolling=this.options.resizePolling==undefined ? 60 : this.options.resizePolling;
+
+      this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
+
+      this.options.bounceEasing = typeof this.options.bounceEasing == 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
+
+      if(!this.options.useTransform && !this.options.useTransition){
+         if(!/(relative|absolute)/i.test(this.scrollerStyle)){
+            this.scrollerStyle['position']="relative";
+         }
+      }
+      this.x=0;
+      this.y=0;
+      this.directionX=0;
+      this.directionY=0;
+      this._events={};
+
+      this._init();
+      this.refresh();
+      this.enable();
+
+      this.scrollTo(this.options.startX,this.options.startY);
    }
    IScroll.prototype={
        _init:function(){
@@ -277,20 +316,307 @@
            }
            return {x:x,y:y};
        },
+       _animate:function(destX,destY,duration,easingFn){
+            let that=this,
+                startX=this.x,
+                startY=this.y,
+                startTime=utils.getTime(),
+                destTime=startTime + duration;
+
+                function step(){
+                   let now=utils.getTime(),
+                       newX,newY,
+                       easing;
+
+                        if ( now >= destTime ) {
+                          that.isAnimating = false;
+                          that._translate(destX, destY);
+
+                          if ( !that.resetPosition(that.options.bounceTime) ) {
+                            that._execEvent('scrollEnd');
+                          }
+
+                          return;
+                        }
+
+                        now = ( now - startTime ) / duration;
+                        easing = easingFn(now);
+                        newX = ( destX - startX ) * easing + startX;
+                        newY = ( destY - startY ) * easing + startY;
+                        that._translate(newX, newY);
+
+                        if ( that.isAnimating ) {
+                          rAF(step);
+                        }
+                }
+                this.isAnimating=true;
+                step();
+
+       },
        destory:function(){
+
+       },
+       on:function(type,fn){
+          if(!this._events[type]){
+            this._events[type]=[];
+          }
+          this._events.push(fn);
+       },
+       off:function(type,fn){
+          if(!this._events[type]){
+            return;
+          }
+          const index=this._events[type].indexOf(fn);
+          if(index>-1){
+            this._events[type].splice(index,1);
+          }
+       },
+       _execEvent:function(type){
+          if(!this._events[type]){
+            return;
+          }
+          const l=this._events[type].length;
+          if(!l){
+            return;
+          }
+          for(let i=0;i<l;i++){
+            this._events[type][i].apply(this,[].slice.call(arguments,1));
+          }
+       },
+       scrollTo:function(x,y,time,easing){
+           easing=easing || utils.ease.circular;
+
+           this.isInTransition=this.options.useTransition && time > 0;
+           const transitionType=this.options.useTransition && easing.style;
+           if(!time || transitionType){
+               if(transitionType){
+                   this._transitionTimingFunction(easing.type);
+                   this._transitionTime(time);
+               }
+               this._translate(x,y);
+           }else{
+               this._animate(x,y,time,easing.fn);
+           }
+
+       },
+       scrollBy:function(x,y,time,easing){
+          x+=this.x;
+          y+=this.y;
+          time=time || 0;
+          this.scrollTo(x,y,time,easing);
+       },
+       _transitionEnd:function(e){
+          if(e.target!=this.scroller || !this.isInTransition){
+            return;
+          }
+          this._transitionTime();
+          if()
+       },
+       _start:function(e){
+          const pointer=e.touches ? e.touches[0] : e;
+          let pos=0;
+          this.initiated=utils.eventType[e.type];
+          this.moved=false;
+          this.distX=0;
+          this.distY=0;
+          this.directionX=0;
+          this.directionY=0;
+          this.directionLocked=0;
+
+          this.startTime=utils.getTime();
+          if(this.options.useTransition && this.isInTransition){
+              this._transitionTime();
+              this.isInTransition=false;
+              pos=this.getComputedPosition();
+              this._translate(Math.round(pos.x),Math.round(pos.y));
+              this._execEvent('scrollEnd');
+          }else if(!this.options.useTransition && this.isAnimating){
+             this.isAnimating=false;
+             this._execEvent('scrollEnd');
+          }
+
+          this.startX=this.x;
+          this.startY=this.y;
+          this.absStartX=this.x;
+          this.absStartY=this.y;
+          this.pointX=pointer.pageX;
+          this.pointY=pointer.pageY;
+
+          this._execEvent('beforeScrollStart');
+       },
+       _move:function(e){
+          if(!this.enable || this.eventType[e.type]!=this.initiated){
+            return;
+          }
+          if(this.options.preventDefault){
+            e.preventDefault();
+          }
+          let point=e.touches ? e.touches[0] : e,
+              deltaX=point.pageX - this.pointX,
+              deltaY=point.pageY - this.pointY,
+              newX,newY,timestampe=utils.getTime(),
+              absDeltaX,absDeltaY;
+          this.pointX=point.pageX;
+          this.pointY=point.pageY;
+
+          this.distX+=deltaX;
+          this.distY+=deltaY;
+
+          absDeltaX=Math.abs(this.deltaX);
+          absDeltaY=Math.abs(this.deltaY);
+
+          if(timestampe - this.endTime > 300 && (this.absDeltaX < 10 && this.absDeltaY < 10)){
+            return;
+          }
+
+          if(!this.directionLocked && !this.options.freeScroll){
+              if(absDeltaX > absDeltaY + this.options.directionLockThreshold){
+                  this.directionLocked='h';
+              }else if(absDeltaY > absDeltaX + this.options.directionLockThreshold){
+                  this.directionLocked='v';
+              }else{
+                  this.directionLocked='n';
+              }
+          }
+
+          if(this.directionLocked=='h'){
+              if ( this.options.eventPassthrough == 'vertical' ) {
+                e.preventDefault();
+              } else if ( this.options.eventPassthrough == 'horizontal' ) {
+                this.initiated = false;
+                return;
+              }
+              deltaY = 0;
+          }else if(this.directionLocked=='v'){
+                  if ( this.options.eventPassthrough == 'horizontal' ) {
+                    e.preventDefault();
+                  } else if ( this.options.eventPassthrough == 'vertical' ) {
+                    this.initiated = false;
+                    return;
+                  }
+                  deltaX = 0;
+          }
+          deltaX=this.hasHorizontalScroll ? deltaX : 0;
+          deltaY=this.hasVerticalScroll ? deltaY : 0;
+
+          newX=this.x + deltaX;
+          newY=this.y + deltaY;
+
+          if(newX > 0 || newX < this.maxScrollerX){
+              newX=this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? newX : this.maxScrollerX;
+          }
+          if(newY > 0 || newY < this.maxScrollerY){
+              newY=this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? newY : this.maxScrollerY;
+          }
+          this.directionX=deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
+          this.directionY=deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
+          if(!this.moved){
+             this._execEvent('scollStart');
+          }
+          
+
+
+       },
+       _end:function(e){
+
+       },
+       _transitionEnd(e){
+
+       },
+       _transitionTime:function(time){
+          if(!utils.options.useTransition){
+             return;
+          }
+          time=time || 0;
+          const durationProp=utils.style.transitionDuration;
+          if(!durationProp){
+             return;
+          }
+          this.scrollerStyle[durationProp]=time+"ms";
+          if(!time && utils.isBadAndroid){
+              this.scrollerStyle[durationProp]='0.0001ms';
+
+              const self=this;
+              rAF(function(){
+                if(self.scrollerStyle[durationProp]==='0.0001ms'){
+                    self.scrollerStyle[durationProp]='0ms';
+                }
+              })
+          }
+       },
+       _transitionTimingFunction:function(easing){
+           this.scrollerStyle[utils.style.transitionTimingFunction]=easing;
+       },
+       _translate:function(x,y){
+           if(utils.options.useTransform){
+             this.scrollerStyle[utils.options.transform]="translate("+x+"px,"+y+"px)";
+           }else{
+              x=Math.round(x);
+              y=Math.round(y);
+              this.scrollerStyle.left=x+"px";
+              this.scrollerStyle.top=y+"px";
+           }
+           this.x=x;
+           this.y=y;
+       },
+       _resize:function(){
+           const that=this;
+           clearTimeout(this.resizeTimeout);
+           this.resizeTimeout=this.setTimeout(function(){
+               that.refresh();
+           },this.options.resizePolling)
+       },
+       disable:function(){
+         this.enabled=false;
+       },
+       enable:function(){
+         this.enable=true;
+       },
+       //刷新
+       refresh:function(){
+           utils.getRect(this.wrapper);
+
+           this.wrapperWidth=this.wrapper.clientWidth;
+           this.wrapperHeight=this.wrapper.clientHeight;
+
+           const rect=utils.getRect(this.scroller);
+           this.scrollerWidth=rect.width;
+           this.scrollerHeight=rect.height;
+
+           this.maxScrollerX=this.wrapperWidth - this.scrollerWidth;
+           this.maxScrollerY=this.wrapperHeight - this.scrollerHeight;
+
+           this.hasHorizontalScroll=this.options.scrollX && this.maxScrollerX < 0;
+           this.hasVerticalScroll=this.options.scrollY && this.maxScrollerY < 0;
+
+           if(!this.hasHorizontalScroll){
+              this.maxScrollerX=0;
+              this.scrollerWidth=this.wrapperWidth;
+           } 
+           if(!this.hasVerticalScroll){
+              this.maxScrollerY=0;
+              this.scrollerHeight=this.wrapperHeight;
+           }
+           this.endTime=0;
+           this.directionY=0;
+           this.directionX=0;
+
+
+       }
+       resetPositin:function(time){
 
        },
        handleEvent:function(e){
           var type=e.type;
           switch(type){
           	 case 'touchstart':
-
+                this._start(e);
           	 break;
           	 case 'touchmove':
-
+                this._move(e);
           	 break;
           	 case 'touchend':
-
+                this._end(e);
           	 break;
           	 case 'orientationchange':
 
