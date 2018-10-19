@@ -6,11 +6,17 @@ import './index.less';
 import chailubiaozhun from '../../images/chailubiaozhun.png';
 import chuchashenqing from '../../images/chuchashenqing.png';
 import xiechengshanglu from '../../images/xiechengshanglu.png';
-
-const DIALOG_TITLE="这里是标题";
+import imgPath from '../../images/bus.png';
+const DIALOG_TITLE="出差事由";
 const urlMapping={
   'BUS_TRIP':'renderExtendBus_tip'
 }
+const bus_trip=[
+    {text:'出发地',number:'user_b_l'},
+    {text:'目的地',number:'user_e_l'},
+    {text:'出发时间',number:'user_b_t'},
+    {text:'返回时间',number:'user_e_t'},
+]
 const SOURCE_ADDRESS="出发地",TARGET_ADDRESS='目的地',BEGIN_TIME="出发时间",BACK_TIME='返回时间';
 class DialogPage extends Component{
 	constructor(props){
@@ -25,10 +31,15 @@ class DialogPage extends Component{
 
 		]
 	}
+	state={
+		showMasker:false,
+		isLoaded:false,
+    }
     handleDialogContent=(wordslot)=>{
 	    let b_loc=SOURCE_ADDRESS,e_loc=TARGET_ADDRESS,b_t=BEGIN_TIME,e_t=BACK_TIME;
 	    wordslot.forEach(item=>{
 	       const number=item.number;
+
 	       switch(number){
 	         case 'user_e_l':
 	             e_loc=item['originalWord']+'  ('+TARGET_ADDRESS+')';
@@ -46,14 +57,22 @@ class DialogPage extends Component{
 	    })
 	    return (
 	       <div className={'dialogContent'}>
-	           <div className={`dialogContent-left`}>
-	               <div className={`loc ${b_loc!=SOURCE_ADDRESS ? 'loc_fill' : ''}`}>{b_loc}</div>
-	               <div className={`loc ${b_loc!=TARGET_ADDRESS ? 'loc_fill' : ''}`}>{e_loc}</div>
-	           </div>
-	           <div className={'dialogContent-right'}>
-	               <div className={`time ${b_t!=BEGIN_TIME ? 'time_fill' : ''}`}>{b_t}</div>
-	               <div className={`time ${b_t!=BACK_TIME ? 'time_fill' : ''}`}>{e_t}</div>
-	           </div>
+              <ul>
+                 {
+                 	bus_trip.map(item=>{
+                 		const tempItem=wordslot.filter(item1=>item1.number==item.number);
+
+                 		return <li key={item.number}>
+                        <div className={'dialogCotnent-left'}>
+                            {item.text}
+                        </div>
+                        <div className={'dialogContent-right'}>
+                            {tempItem && tempItem.length > 0 ? tempItem[0].normalizedWord : ''}
+                        </div>
+                 	</li>
+                 	})
+                 }
+              </ul>
 	       </div>
 	    )
   }
@@ -79,6 +98,16 @@ class DialogPage extends Component{
 	 //        location.href=urlStr;
 	 //    }
 	}
+	handleLoaded=()=>{
+		this.setState({
+			loaded:true,
+		})
+	}
+	handleMasker=()=>{
+		this.setState({
+			showMasker:true,
+		})
+	}
 	render(){
 		const item={
 			className:"chatbot-dialog","text":"您什么时候回来呢？",id:2,"kdIntention":{"intention":"BUS_TRIP","intentionName":"出差申请",
@@ -90,10 +119,16 @@ class DialogPage extends Component{
 		const reason="";
 		return (
             <div>
-       
+              <div onClick={this.handleLoaded}>
+                  loaded
+              </div>
+              <div onClick={this.handleMasker}>
+                  showMasker
+              </div>
               <TypeIn title={reason ? reason : DIALOG_TITLE} className={`ai-ti-demo`} say="您什么时候回来呢？" kdIntention={kdIntention}
                    content={()=>this.handleDialogContent(kdIntention['kdWordslots'])} 
                    onSubmit={kdIntention.status=='confirm' ? ()=>this.handleDialogSubmit(item) : null}
+                   imgPath={imgPath} loaded={this.state.loaded} showMasker={this.state.showMasker} isFinished={true} 
                 >
                {item.type=='URL' ? this[urlMapping[kdIntention['intention']]] : null}
               </TypeIn>
@@ -105,4 +140,9 @@ export default DialogPage;
 
 /*
 *        <RecommendCard data={this.data} className={'ai-rc-card'} desc={'请问我能帮您做点什么?'}></RecommendCard>
+	               // <div className={`loc ${b_loc!=SOURCE_ADDRESS ? 'loc_fill' : ''}`}>{b_loc}</div>
+	               // <div className={`loc ${b_loc!=TARGET_ADDRESS ? 'loc_fill' : ''}`}>{e_loc}</div>
+
+	               // <div className={`time ${b_t!=BEGIN_TIME ? 'time_fill' : ''}`}>{b_t}</div>
+	               // <div className={`time ${b_t!=BACK_TIME ? 'time_fill' : ''}`}>{e_t}</div>
 */

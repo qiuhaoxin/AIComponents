@@ -484,7 +484,7 @@ IScroll.prototype = {
 		this.absStartY = this.y;
 		this.pointX    = point.pageX;
 		this.pointY    = point.pageY;
-
+        this.isScrollBy=false;
 		this._execEvent('beforeScrollStart');
 	},
 
@@ -546,10 +546,8 @@ IScroll.prototype = {
 
 			deltaX = 0;
 		}
-
 		deltaX = this.hasHorizontalScroll ? deltaX : 0;
-		deltaY = this.hasVerticalScroll ? deltaY : 0;
-
+		//deltaY = this.hasVerticalScroll ? deltaY : 0;
 		newX = this.x + deltaX;
 		newY = this.y + deltaY;
 
@@ -557,9 +555,9 @@ IScroll.prototype = {
 		if ( newX > 0 || newX < this.maxScrollX ) {
 			newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
 		}
-		if ( newY > 0 || newY < this.maxScrollY ) {
-			newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
-		}
+		// if ( newY > 0 || newY < this.maxScrollY ) {
+		// 	newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
+		// }
 
 		this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
 		this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
@@ -674,25 +672,23 @@ IScroll.prototype = {
 			y = this.y;
 
 		time = time || 0;
+		if (!this.hasHorizontalScroll || this.x > 0) {
 
-		if ( !this.hasHorizontalScroll || this.x > 0 ) {
 			x = 0;
 		} else if ( this.x < this.maxScrollX ) {
 			x = this.maxScrollX;
 		}
 
-		if ( !this.hasVerticalScroll || this.y > 0 ) {
+		if ( (!this.hasVerticalScroll || this.y > 0) && !this.isScrollBy ) {
 			y = 0;
 		} else if ( this.y < this.maxScrollY ) {
-			y = this.maxScrollY;
+			//y = this.maxScrollY;
 		}
 
 		if ( x == this.x && y == this.y ) {
 			return false;
 		}
-
 		this.scrollTo(x, y, time, this.options.bounceEasing);
-
 		return true;
 	},
 
@@ -717,7 +713,6 @@ IScroll.prototype = {
 
 		this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
 		this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
-
 /* REPLACE END: refresh */
 
 		this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
@@ -732,7 +727,6 @@ IScroll.prototype = {
 			this.maxScrollY = 0;
 			this.scrollerHeight = this.wrapperHeight;
 		}
-
 		this.endTime = 0;
 		this.directionX = 0;
 		this.directionY = 0;
@@ -791,20 +785,20 @@ IScroll.prototype = {
 
 		for ( ; i < l; i++ ) {
 			this._events[type][i].apply(this, [].slice.call(arguments, 1));
-		}
+		} 
 	},
 
-	scrollBy: function (x, y, time, easing) {
+	scrollBy: function (x, y, time, easing,flag) {
 		x = this.x + x;
 		y = this.y + y;
 		time = time || 0;
 
-		this.scrollTo(x, y, time, easing);
+		this.scrollTo(x, y, time, easing,flag);
 	},
 
-	scrollTo: function (x, y, time, easing) {
+	scrollTo: function (x, y, time, easing,flag) {
 		easing = easing || utils.ease.circular;
-
+        this.isScrollBy=flag ? true : false;
 		this.isInTransition = this.options.useTransition && time > 0;
 		var transitionType = this.options.useTransition && easing.style;
 		if ( !time || transitionType ) {

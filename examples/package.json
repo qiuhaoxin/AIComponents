@@ -10,7 +10,7 @@
   "author": "haoxin_qiu",
   "license": "ISC",
   "dependencies": {
-    "aicomponents": "^1.1.8",
+    "aicomponents": "^1.7.0",
     "babel-loader": "^7.1.4",
     "babel-preset-react-app": "^3.1.2",
     "file-loader": "^2.0.0",

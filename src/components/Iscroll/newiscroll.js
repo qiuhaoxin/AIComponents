@@ -237,8 +237,6 @@
 
       	  useTransition:true,
       	  useTransform:true,
-          freeScroll
-
       }
       for(var i in options){
       	 this.options[i]=options[i];
@@ -410,7 +408,10 @@
             return;
           }
           this._transitionTime();
-          if()
+          if(!this.resetPosition(this.options.bounceTime)){
+            this.isInTransition=false;
+            this._execEvent('scrollEnd');
+          }
        },
        _start:function(e){
           const pointer=e.touches ? e.touches[0] : e;
@@ -445,7 +446,7 @@
           this._execEvent('beforeScrollStart');
        },
        _move:function(e){
-          if(!this.enable || this.eventType[e.type]!=this.initiated){
+          if(!this.enable || utils.eventType[e.type]!=this.initiated){
             return;
           }
           if(this.options.preventDefault){
@@ -513,18 +514,73 @@
           if(!this.moved){
              this._execEvent('scollStart');
           }
+          this._translate(newX,newY);
           
-
+          if(timestampe - this.startTime > 300){
+              this.startTime=timestampe;
+              this.startX=this.x;
+              this.startY=this.y;
+          }
 
        },
        _end:function(e){
+          if(!this.enable && this.eventType[e.type]!=this.initiated){
+             return;
+          }
+          if(this.options.preventDefault){
+             e.preventDefault();
+          }
+          let point=e.changedTouches ? e.touches[0] : e,
+              momentumX,
+              momentumY,
+              duration=utils.getTime() - this.startTime,
+              newX=Math.round(this.x),
+              newY=Math.round(this.y),
+              distanceX=newX - this.startX,
+              distanceY=newY - this.startY,
+              time=0,
+              easing='';
 
-       },
-       _transitionEnd(e){
+          this.isInTransition=0;
+          this.initiated=0;
+          this.endTime=utils.getTime();
+
+          if(this.resetPosition(this.options.bounceTime)){
+            return;
+          }
+          this.scrollTo(newX,newY);
+
+          if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
+            this._execEvent('flick');
+            return;
+          }
+
+          // start momentum animation if needed
+          if ( this.options.momentum && duration < 300 ) {
+            momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration) : { destination: newX, duration: 0 };
+            momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration) : { destination: newY, duration: 0 };
+            newX = momentumX.destination;
+            newY = momentumY.destination;
+            time = Math.max(momentumX.duration, momentumY.duration);
+            this.isInTransition = 1;
+          }
+
+      // INSERT POINT: _end
+
+          if ( newX != this.x || newY != this.y ) {
+            // change easing function when scroller goes out of the boundaries
+            if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
+              easing = utils.ease.quadratic;
+            }
+
+            this.scrollTo(newX, newY, time, easing);
+            return;
+          }
+          this._execEvent('scrollEnd');
 
        },
        _transitionTime:function(time){
-          if(!utils.options.useTransition){
+          if(!this.options.useTransition){
              return;
           }
           time=time || 0;
@@ -548,8 +604,8 @@
            this.scrollerStyle[utils.style.transitionTimingFunction]=easing;
        },
        _translate:function(x,y){
-           if(utils.options.useTransform){
-             this.scrollerStyle[utils.options.transform]="translate("+x+"px,"+y+"px)";
+           if(this.options.useTransform){
+             this.scrollerStyle[utils.style.transform]="translate("+x+"px,"+y+"px)";
            }else{
               x=Math.round(x);
               y=Math.round(y);
@@ -602,8 +658,29 @@
            this.directionX=0;
 
 
-       }
-       resetPositin:function(time){
+       },
+       resetPosition:function(time){
+          let x=this.x,
+              y=this.y;
+          time=time || 0;
+
+          if(!this.hasHorizontalScroll || this.x > 0){
+              x=0;
+          }else if(this.x < this.maxScrollerX){
+              x=this.maxScrollerX;
+          }
+
+          if(!this.hasVerticalScroll || this.y > 0){
+              y=0;
+          }else if(this.y < this.maxScrollerY){
+              //y=this.maxScrollerY;
+          }
+          if(x==this.x && y==this.y){
+              return false;
+          }
+           
+          this._translate(x,y,time,this.options.bounceEasing);
+          return true;
 
        },
        handleEvent:function(e){
@@ -619,17 +696,14 @@
                 this._end(e);
           	 break;
           	 case 'orientationchange':
-
-          	 break;
           	 case 'resize':
-
+                this._resize(e)
           	 break;
           	 case 'transitionend':
           	 case 'webkitTransitionEnd':
           	 case 'oTransitionEnd':
           	 case 'MSTransitionEnd':
-
-
+                this._transitionEnd(e);
           	 break;
 
           }

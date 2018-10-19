@@ -1,12 +1,24 @@
 .ai-ti-wrapper{
   & .ai-ti-dialog{
-  display:flex;box-shadow: 0 2px 8px 0 #D6E2EF;border-radius: 10px;
+  display:flex;box-shadow: 0 2px 8px 0 #D6E2EF;border-radius: 10px;position:relative;
+  & .ai-ti-masker{
+      position:absolute;left:0;right:0;top:0;bottom:0;opacity: 0.3;background: #000000;box-shadow: 0 2px 8px 0 #C3D3E4;border-radius: 10px;
+      & .ai-ti-circle{
+         width:50px;height:50px;background:#fff;opacity:0.36;left:50%;top:50%;margin-top:-25px;margin-left:-25px;position:absolute;border-radius:50%;
+      }
+      & .ai-ti-tip{
+         color:#fff;position:absolute;top:60%;left:42%;margin-top:8px;font-size: 16px;
+      }
+  }
   & .ai-ti-inner{
       padding:12px 12px 0 12px;font-family: PingFangSC-Regular;font-size: 16px;color: #666;line-height:22px;width:100%;position:relative;color:#999;
         & .ai-ti-header{
-          position:relative;padding-bottom:12px;padding-left:4px;
+          position:relative;padding-bottom:12px;padding-left:4px;display:inline-flex;align-items:center;width:100%;
           &:before{
             content:'';position:absolute;left:-10px;right:-10px;height:1px;background-color:#e5e5e5;bottom:0;
+          }
+          & > img{
+             height:24px;width:24px;
           }
         }
         & .title_fill{
@@ -35,6 +47,7 @@
 }
    & .ai-ti-say{
       width:100%;
-      margin-top:16px;color:#333;
+      margin-bottom:16px;color:#333;
    }
+
 }

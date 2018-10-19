@@ -8,8 +8,9 @@ import Styles from './index.less';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import {fromJS,is} from 'immutable';
+import Circle from './circle';
 
-const DIALOG_TITLE="这里是标题";
+const DIALOG_TITLE="出差事由";
 const prefixCls='ai-ti';
 class TypeIn extends Component{
 	constructor(props){
@@ -17,6 +18,28 @@ class TypeIn extends Component{
 	}
   shouldComponentUpdate(nextProps,nextState){
     return !is(fromJS(nextProps),fromJS(this.props));
+  }
+  componentWillReceiveProps(nextProps){
+
+     if(nextProps.loaded){
+        if(this.Circle){
+          this.Circle.reDraw();
+        }
+     }
+  }
+  componentDidMount(){
+
+      // this.Circle=new Circle(this.circleWrapper,{
+      //     radius:44,
+      //     style:{
+      //       background:'#203D5C',
+      //     },
+      //     startAngle:- Math.PI * 2 / 8,
+      //     endAngle:Math.PI * 2 / 4 * 3,
+      //     beginAngle:Math.PI,
+      //     beginFrequency:Math.PI * 2 / 100,
+      //     endFrequency:Math.PI * 2 / 50,
+      // });
   }
   renderFooter=()=>{
     	const {footer,onEdit,onSubmit,onEditStr,onSubmitStr}=this.props;
@@ -37,8 +60,9 @@ class TypeIn extends Component{
     	}
   }
 	render(){
-		const {style,className,title,visible,content,children,say,kdIntention}=this.props;
+		const {style,className,title,visible,content,children,say,kdIntention,imgPath,showMasker,finishImg,isFinished}=this.props;
 		const wrapperCls=`${prefixCls}-dialog`;
+
 		const ClassName=ClassNames({
             [`${className}`]:!!className,
 		},`${prefixCls}-wrapper`);
@@ -50,22 +74,34 @@ class TypeIn extends Component{
 		return (
           <div className={`${ClassName}`}>
             {
+                say ? <div className={`${prefixCls}-say`}>{say}</div> : null
+            }
+            {
                kdIntention==null ? null 
                :<div className={`${wrapperCls}`} style={wrapperStyle}>
+                  <img src={finishImg}/>
 	                <div className={`${prefixCls}-inner`}>
 	                   <div className={`${prefixCls}-header ${title!=DIALOG_TITLE ? 'title_fill' : ''}`}>
-	                        {title}
+	                        <img src={imgPath}/><span style={{marginLeft:8}}>{title}</span>
 	                   </div>
 	                   <div className={`${prefixCls}-content`}>
 	                        {typeof content=='function' ? content() : content}
 	                   </div>
 	                   {this.renderFooter()}
 	                </div>
+                  <div className={`${prefixCls}-masker`} style={{visibility:showMasker ? 'visible' : 'hidden'}}>
+                      <div className={`${prefixCls}-circle`}>
+                         <div ref={el=>this.circleWrapper=el}>
+
+                         </div>
+                      </div>
+                      <div className={`${prefixCls}-tip`}>
+                           提交中...
+                      </div>
+                  </div>
                 </div> 
             }
-            {
-                say ? <div className={`${prefixCls}-say`}>{say}</div> : null
-            }
+
           </div>
 		)
 	}
@@ -84,7 +120,6 @@ TypeIn.defaultProps={
    onEditStr:'修改',
    onSubmitStr:'提交',
 }
-
 export default TypeIn;
 
 

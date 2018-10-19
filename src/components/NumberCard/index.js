@@ -15,9 +15,10 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import './index.less';
 import {fromJS,is} from 'immutable';
-const prefixCls="ai-nc";
+import './index.less';
+
+const prefixCls="ai-nc1";
 class NumberCard extends Component{
 	constructor(props){
 		super(props);
@@ -25,72 +26,95 @@ class NumberCard extends Component{
   shouldComponentUpdate(nextProps,nextState){
       return !is(fromJS(nextProps),fromJS(this.props)) || !is(fromJS(nextState),fromJS(this.state));
   }
-	renderDetailOne=()=>{
-	   const {data}=this.props;
-       return (
-         <div className={`${prefixCls}-content ${prefixCls}-row`}>
-            <div className={`${prefixCls}-left`}>
-               <div>
-                  <div className={`${prefixCls}-content-title`}>
-  		                {data.title}
-  		            </div>
-               </div>   
-  		         <div className={`${prefixCls}-content-value`}>
-  		            {data.value}
-  		         </div>
-            </div>
-            {
-                data.detail ? 
-                <div className={`${prefixCls}-right`}>
-                  <div className={`${prefixCls}-detail-value`}>
-                     {data.detail[0].value}
-                  </div>
-                  <div className={`${prefixCls}-detail-item`}>
-                     {data.detail[0].item}
-                  </div>
-                </div> : null
-            }
-         </div>
-       )
-    }
-    renderDetailThanOne=()=>{
-    	const {data}=this.props;
-    	const detailList=data.detail.map((item,index)=><li key={'id' in item ? item['id'] : index}>
+    renderNumberDetail=()=>{
+        const {data:{numeralDetail}}=this.props;
+        let str="";
+        if(numeralDetail && numeralDetail.length>1){
+            return (
+               <ul className={`${prefixCls}-numberalDetail-column`}>
+                   {
+                       numeralDetail.map((item,index)=><li key={item.id ? item.id : index}>
+                          <div className={`${prefixCls}-numberalDetail-column-item`}>
+                            {item.item}
+                          </div>
+                          <div className={`${prefixCls}-numberalDetail-column-value`}>
+                            {item.value}
+                          </div>
+                       </li>)
+                   }
+               </ul>
+            )
+        }else if(numeralDetail.length==1){
+            str=numeralDetail.map((item,index)=><li key={item.id ? item.id : index}>
+                <div className={`${prefixCls}-numberalDetail-row-value`}>
+                  {item.value}
+                </div>
+                <div className={`${prefixCls}-numberalDetail-row-item`}>
+                  {item.item}
+                </div>
+            </li>)
+            return (
+              <ul className={`${prefixCls}-numberalDetail-row`}>
+                  { 
+                    str  
+                  }
+              </ul>
+            )
+        }
+    }  
+    renderRatioDetial=()=>{
+        const {data:{ratioDetail}}=this.props;
+        const str=ratioDetail.map((item,index)=><li key={'id' in item ? item['id'] : index}>
             <div className={`${prefixCls}-detail-value`}>
                {item.value}
             </div>
             <div className={`${prefixCls}-detail-item`}>{item.item}</div>
-    	</li>)
+        </li>)
         return (
-        	<div className={`${prefixCls}-content ${prefixCls}-column`}>
-	            <div className={`${prefixCls}-content-title`}>
-	                {data.title}
-	            </div>
-	            <div className={`${prefixCls}-content-value`}>
-	                {data.value}
-	            </div>
-	            <ul>
-                    {detailList}
-	            </ul>
+           <ul className={`${prefixCls}-ratioDetail`}>
+              {str}
+           </ul>
+        )
+    }
+    renderOneRow=()=>{
+
+    }
+    renderTwoRow=()=>{
+        const {data:{numeralDetail,ratioDetail,title}}=this.props;//
+        return (
+            <div className={`${prefixCls}-content ai-nc1-column`}>
+                <div className={`${prefixCls}-content-title`}>
+                    {title}
+                </div>
+                {
+                  numeralDetail && numeralDetail.length > 0 ? this.renderNumberDetail() : null
+                }
+
+                {
+                  ratioDetail && ratioDetail.length>0 ? this.renderRatioDetial() : null
+                }
             </div>
         )
     }
 	render(){
-    console.log("render is NumberCard");
 		const {className,style,selfStr,data}=this.props;
 		const classNames=ClassNames({
             [`${className}`]:className,
 		}
 		,`${prefixCls}-wrapper`)
+    const numeralDetail=data.numberalDetail;
+    const ratioDetail=data.ratioDetail;
 		return (
            <div className={classNames} style={style}>
                <div>
                    {selfStr}
                </div>
                <div className={`${prefixCls}-desc`}>
-                   {data.desc}
+                  {data.desc}
                </div>
-               {data && data.detail && data.detail.length>1 ? this.renderDetailThanOne() : this.renderDetailOne()}
+               {
+                  numeralDetail && numeralDetail.length==1 && ratioDetail && ratioDetail.length==1 ? this.renderOneRow() : this.renderTwoRow()
+               }
            </div>
 		)
 	}
@@ -104,46 +128,4 @@ NumberCard.defaultProps={
 
 }
 export default NumberCard;
-
-/*
-		const {className,style,selfStr,data}=this.props;
-		const classNames=ClassNames({
-            [`${className}`]:className,
-		}
-		,`${prefixCls}-wrapper`)
-		return (
-           <div className={classNames} style={style}>
-               <div>
-                   {selfStr}
-               </div>
-               <div className={`${prefixCls}-desc`}>
-                   {data.desc}
-               </div>
-               {data && data.detail && data.detail.lengt > 1 ? this.renderDetailThanOne() : this.renderDetailOne()}
-           </div>
-		)
-
-
-
-		    renderDetailThanOne=()=>{
-        return (
-        	<div className={`${prefixCls}-content`}>
-	            <div className={`${prefixCls}-content-title`}>
-	                {data.title}
-	            </div>
-	            <div>
-	                {data.value}
-	            <div>
-            </div>
-        )
-
-    }
-    renderDetailOne=()=>{
-       return (
-         <div className={`${prefixCls}-content`}>
-
-         </div>
-       )
-    }
-*/
 

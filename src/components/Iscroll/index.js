@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.less';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-//import IScroll from './iscroll';
-import NewIScroll from './newiscroll';
+import IScroll from './iscroll';
+//import NewIScroll from './newiscroll';
 
 const iScrollEvents=[
    'beforeScrollStart','scrollCancel','scrollStart',
@@ -28,9 +28,16 @@ class Iscroll extends Component{
 	//初始化
 	initIscroll=()=>{
 	   // const {iScroll,options}=this.props;
+        const _this=this;
 	    const options={};
-	    const iScrollInstance=new NewIScroll(ReactDOM.findDOMNode(this),options);
-	    this.iScrollInstance=iScrollInstance;
+        try{
+            setTimeout(function(){
+                const iScrollInstance=new IScroll(ReactDOM.findDOMNode(_this),options);
+                _this.iScrollInstance=iScrollInstance;
+            },300)
+        }catch(e){
+           console.log("e is "+e);
+        }
 	}
 	//销毁
 	destoryIscroll=()=>{
@@ -69,7 +76,11 @@ class Iscroll extends Component{
 
     }
     scrollBy=(x,y,time,easing)=>{
-    	this.iScrollInstance.scrollBy(x,y,time,easing);
+        console.log("y is "+y);
+    	this.iScrollInstance.scrollBy(x,y,time,null,true);
+    }
+    scrollTo=(x,y,time,easing)=>{
+        this.iScrollInstance.scrollTo(x,y,time,null,true);
     }
 	render(){
 		return (
