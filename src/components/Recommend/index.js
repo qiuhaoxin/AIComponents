@@ -8,7 +8,8 @@ import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import './index.less';
 import {fromJS,is} from 'immutable';
-
+import Button from '../Button';
+import {Answer} from '../Answer';
 const prefixCls="ai-rc";
 class RecommendCard extends Component{
 	constructor(props){
@@ -17,9 +18,8 @@ class RecommendCard extends Component{
   shouldComponentUpdate(nextProps,nextState){
       return !is(fromJS(nextProps),fromJS(this.props)) || !is(fromJS(nextState),fromJS(this.state));
   }
-	handleClickBtn=(e)=>{
+	handleClickBtn=(e,text)=>{
        const {onBtnClick}=this.props;
-
        onBtnClick && onBtnClick();
 	}
 	handleItemClick=(e,item)=>{
@@ -40,7 +40,7 @@ class RecommendCard extends Component{
                         {item.ftitle}
                     </div>
                     <div className={`${prefixCls}-desc`}>
-                        {item.ftips}
+                        {item.ftips && item.ftips[0]}
                     </div>
                 </div>
     		</li>
@@ -56,9 +56,9 @@ class RecommendCard extends Component{
     	const {btnName}=this.props;
         return (
            <div className={`${prefixCls}-footer`}>
-               <span className={`${prefixCls}-btn`} onClick={(e)=>this.handleClickBtn(e)}>
-                    {btnName}
-               </span>
+                <Button btnStr={btnName} style={{backgroundColor:'#4598F0',marginRight:16}} onClick={(e,text)=>this.handleClickBtn(e,text)}>
+
+                </Button>
            </div>
         )
     }
@@ -71,7 +71,7 @@ class RecommendCard extends Component{
 		return (
            <div style={style} className={classNames}>
                {
-                  desc ? <div className={`${prefixCls}-description`}>{desc}</div> : null
+                  desc ? <Answer style={{marginBottom:8,lineHeight:'23px',marginTop:30,padding:'8px 12px 8px 16px'}} str={desc}></Answer> : null
                }
                <div className={`${prefixCls}-box`}>
                  {this.renderAPPList()}
@@ -93,5 +93,14 @@ RecommendCard.defaultProps={
     btnName:'换一换',
     onBtnClick:null,
     onItemClick:null,
+    desc:'Hi~我是小K,下面是我学会的技能,快让我表演给你看吧',
 }
 export default RecommendCard;
+
+/*
+*               <span className={`${prefixCls}-btn`} onClick={(e)=>this.handleClickBtn(e)}>
+                    {btnName}
+               </span>
+
+               <div className={`${prefixCls}-description`}>{desc}</div>
+*/

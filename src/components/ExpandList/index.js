@@ -8,9 +8,9 @@ import ClassNames from 'classnames';
 import './index.less';
 import PropTypes from 'prop-types';
 import {fromJS,is} from 'immutable';
-
+import SuperComponent from '../SuperComponent';
 const prefixCls="ai-el";
-class ExpandList extends Component{
+class ExpandList extends SuperComponent{
 	constructor(props){
 		super(props);
     this.state={
@@ -32,11 +32,17 @@ class ExpandList extends Component{
       showExpandBtn:false
     })
   }
+  handleItemClick=(item)=>{
+    const {onItemClick}=this.props;
+    onItemClick && onItemClick(item);
+  }
 	renderList=()=>{
         const {data}=this.props;
         const {list,showExpandBtn}=this.state;
         const listStr=list.map((item,index)=>{
-        	return <li key={`${item.value ? item.value : index}`} onClick={e=>this.hanldeClick(e,item)}>
+          item.id=(1 + index);
+        	return <li key={`${item.value ? item.value : index}`}
+            onTouchStart={this.handleTouchStart} onTouchEnd={(e)=>this.handleTouchEnd(e,()=>this.handleItemClick.call(this,item))} onTouchMove={this.handleTouchMove}>
                {item.desc}
         	</li>
         })
@@ -46,13 +52,13 @@ class ExpandList extends Component{
                {listStr}
             </ul>
             {
-              showExpandBtn ? <div className={`${prefixCls}-expand`} onClick={this.handleExpand}>展开全部</div> : null 
+              showExpandBtn ? <div className={`${prefixCls}-expand`} onTouchStart={this.handleTouchStart} 
+              onTouchEnd={(e)=>this.handleTouchEnd(e,this.handleExpand)}>展开全部</div> : null 
             }
           </div>  
         )
 	}
 	render(){
-       console.log("render in ExpandList");
        const {className,style,data}=this.props;
        const ClassName=ClassNames({
            [`${className}`]:className,

@@ -1,0 +1,57 @@
+.keyframes(@name; @arguments) {
+	@-moz-keyframes @name { @arguments(); }
+	@-webkit-keyframes @name { @arguments(); }
+	@keyframes @name { @arguments(); }
+}
+.animation(@arguments) {
+	-webkit-animation: @arguments;
+	-moz-animation: @arguments;
+	animation: @arguments;
+}
+.ai-loading-wrapper{
+    position:fixed;left:0;width:100%;top:0;z-index:1009;bottom:0;background:rgba(0,0,0,0);
+    &.ai-loading-show{
+        display:block;
+    }
+    &.ai-loading-hide{
+        display:none;
+    }
+    & .ai-loading-inner{
+        position:fixed;left:50%;margin-left:-25px;top:25%;display:flex;justify-content:center;flex-direction:column;align-items:center;
+	    & .ai-loading-content{
+		    width:50px;height:50px;
+		    & > span{
+		       float:left;
+		       display:block;
+		       width:15px;
+		       height:15px;
+		       margin-right:10px;margin-bottom:10px;border-radius:50%;
+		       transform-origin:50% 50%;
+		       .keyframes(test,{
+		          0%{transform:scale(0.86,0.86);}
+		          50%{transform:scale(1.1,1.1);}
+	              100%{transform:scale(0.86,0.86);}
+		       })
+		    }
+	        & > span:first-child{
+	           background-color:#2386ee;
+	           .animation(test 1s -.9s linear both infinite);
+	        }
+	        & > span:nth-child(2){
+	           background-color:#00ccfe;margin-right:0;
+	           .animation(test 1s -.8s linear both infinite);
+	        }
+	        & > span:nth-child(3){
+	           background-color:#05c8c8;
+	           .animation(test 1s -.7s linear both infinite);
+	        }
+	        & > span:last-child{
+	           background-color:#a06eff;margin-right:0;
+	           .animation(test 1s -.6s linear both infinite);
+	        }
+		}
+		& .ai-loading-tips{
+           color:#666;font-size:12px;
+		}
+    }
+}

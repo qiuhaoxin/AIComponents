@@ -1,6 +1,7 @@
 .ai-ti-wrapper{
+  padding-bottom:10px;
   & .ai-ti-dialog{
-  display:flex;box-shadow: 0 2px 8px 0 #D6E2EF;border-radius: 10px;position:relative;
+  display:flex;box-shadow: 0 0 8px 0 #D6E2EF;border-radius: 10px;position:relative;margin-top:8px;
   & .ai-ti-masker{
       position:absolute;left:0;right:0;top:0;bottom:0;opacity: 0.3;background: #000000;box-shadow: 0 2px 8px 0 #C3D3E4;border-radius: 10px;
       & .ai-ti-circle{
@@ -10,12 +11,15 @@
          color:#fff;position:absolute;top:60%;left:42%;margin-top:8px;font-size: 16px;
       }
   }
+  & .ai-ti-submit{
+     width:58px;height:75.6px;position:absolute;right:0;top:0;
+  }
   & .ai-ti-inner{
       padding:12px 12px 0 12px;font-family: PingFangSC-Regular;font-size: 16px;color: #666;line-height:22px;width:100%;position:relative;color:#999;
         & .ai-ti-header{
           position:relative;padding-bottom:12px;padding-left:4px;display:inline-flex;align-items:center;width:100%;
           &:before{
-            content:'';position:absolute;left:-10px;right:-10px;height:1px;background-color:#e5e5e5;bottom:0;
+            content:'';position:absolute;left:-8px;right:-4px;height:1px;background-color:#e5e5e5;bottom:0;transform:scaleY(.5);
           }
           & > img{
              height:24px;width:24px;
@@ -31,7 +35,7 @@
            display:flex;flex-direction:row;position:relative;align-items:center;justify-content:flex-end;padding-top:10px;padding-bottom:9.5px;
            font-family: PingFangSC-Regular;padding-right:4px;
            &:before{
-              content:'';position:absolute;top:0;height:1px;background-color:#e5e5e5;left:-12px;right:-12px;transform:scaleY(.5);
+              content:'';position:absolute;top:0;height:1px;background-color:#e5e5e5;left:-8px;right:-8px;transform:scaleY(.5);
            }
            & > span{
                padding:8px 14px;border-radius: 15px;font-size:14px;
@@ -46,8 +50,12 @@
   }
 }
    & .ai-ti-say{
-      width:100%;
-      margin-bottom:16px;color:#333;
+      display:inline-flex;align-items:center;margin-top:10px;background: #FFFFFF;
+      box-shadow: 0 0 8px 0 #C3D3E4;
+      border-radius: 0px 100px 100px 80px;padding:12px 12px 13px 16px;
+      color:#333;font-size:15px;line-height:15px;
+      & > img{
+         width:24px;height:24px;margin-right:8px;
+      }
    }
-
 }

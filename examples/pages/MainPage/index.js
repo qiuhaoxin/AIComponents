@@ -23,9 +23,26 @@ class MainPage extends Component{
                   <div>
                       <Link to="/VoiceReceive">VoiceReceive</Link>
                   </div>
+                <div>
+                      <Link to="/VoiceReceive2">VoiceReceive2</Link>
+                  </div>
                   <div>
                       <Link to="/Iscroll">Iscroll</Link>
                   </div>
+                  <div>
+                      <Link to="/input">Input</Link>
+                  </div>
+                <div>
+                    <Link to="/SingleRecommend">SingleRecommend</Link>
+                </div>
+
+                <div>
+                    <Link to="/Recommend">Recommend</Link>
+                </div>
+
+                <div>
+                    <Link to="/InputSample">InputSample</Link>
+                </div>
             </div>
 		)
 	}

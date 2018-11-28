@@ -1,5 +1,6 @@
 (function(window,document){
     function Circle (el,options){
+       const _this=this;
        this.wrapper=typeof el ==='string' ? document.querySelector(el) : el;
        let wrapperHeight=0,
            wrapperWidth=0;
@@ -12,7 +13,12 @@
        	  this.options[key]=options[key];
        }
        this._init();
-       this._draw();
+       //this._draw();
+       setTimeout(function(){
+          _this.reDraw();
+       },180);
+       this.stopAnimation=false;
+       
        //this.reDraw();
     }
     Circle.prototype={
@@ -28,6 +34,7 @@
                      window.oRequestAnimationFrame      ||
                      window.MozRequestAnimationFrame    ||
                      window.MsRequestAnimationFrame;
+          window.stopRAF=window.cancelAnimationFrame;        
         },
         _draw:function(startAngle,endAngle){
         	this.ctx.clearRect(0,0,this.wrapperWidth,this.wrapperHeight);
@@ -50,9 +57,12 @@
 
         },
         animate:function(){
+          if(this.stopAnimation)return;
           const frequency=Math.PI * 2 / 50;
           this.options.startAngle+=frequency;
-          if(this.options.startAngle > this.options.endAngle)return;
+          if(this.options.startAngle > this.options.endAngle){
+            this.options.endAngle+=Math.PI * 2;
+          }
           this.ctx.clearRect(0,0,this.wrapperWidth,this.wrapperHeight);
           this.ctx.beginPath();
           this.ctx.moveTo(this.wrapperWidth / 2,this.wrapperHeight / 2);
@@ -60,18 +70,20 @@
           this.ctx.closePath();
           this.ctx.fillStyle="#000";
           this.ctx.fill();
-          window.rAF(this.animate.bind(this));
+          this.animationId=window.rAF(this.animate.bind(this));
+        },
+        stopAnimate:function(){
+          //console.log("animationId is "+this.animationId);
+          window.stopRAF(this.animationId);
+          this.stopAnimation=true;
         }
     }
 
     if(typeof module!='undefined' && module.exports){
-    	console.log("module");
     	module.exports=Circle;
     }else if(typeof define=='function' && define.amd){
-    	console.log("define");
         define(function(){return Circle;});
     }else{
-    	console.log("window");
     	window.Circle=Circle;
     }
 

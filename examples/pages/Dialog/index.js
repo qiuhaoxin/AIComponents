@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
- import {Dialog,TypeIn,RecommendCard} from '../../../src/index.js';
+ import {Dialog,TypeIn,RecommendCard,BackIcon,Loading} from '../../../src/index.js';
 //import  {Dialog,RecommendCard} from 'aicomponents';
 import './index.less';
 
@@ -104,9 +104,18 @@ class DialogPage extends Component{
 		})
 	}
 	handleMasker=()=>{
-		this.setState({
-			showMasker:true,
-		})
+		// this.setState({
+		// 	showMasker:true,
+		// })
+		if(this.wrapper1){
+			console.log("wrapper1 height is "+this.wrapper1.getCardHeight());
+		}
+		if(this.wrapper2){
+			console.log("wrapper2 height is "+this.wrapper2.getCardHeight());
+		}
+	}
+	handleMainpageClick=(e)=>{
+		console.log("handleMainpageClick");
 	}
 	render(){
 		const item={
@@ -119,19 +128,38 @@ class DialogPage extends Component{
 		const reason="";
 		return (
             <div>
+              <RecommendCard data={this.data} className={'ai-rc-card'} desc={'Hi~我是小K,下面是我学会的技能,快让我表演给你看吧?'}></RecommendCard>
               <div onClick={this.handleLoaded}>
                   loaded
               </div>
               <div onClick={this.handleMasker}>
                   showMasker
               </div>
-              <TypeIn title={reason ? reason : DIALOG_TITLE} className={`ai-ti-demo`} say="您什么时候回来呢？" kdIntention={kdIntention}
-                   content={()=>this.handleDialogContent(kdIntention['kdWordslots'])} 
-                   onSubmit={kdIntention.status=='confirm' ? ()=>this.handleDialogSubmit(item) : null}
-                   imgPath={imgPath} loaded={this.state.loaded} showMasker={this.state.showMasker} isFinished={true} 
+                <TypeIn ref={el => this.wrapper1 = el}
+                        title={reason ? reason : DIALOG_TITLE}
+                        className={`ai-ti-demo`}
+                        say="您什么时候回来呢？"
+                        kdIntention={kdIntention}
+                        content={() => this.handleDialogContent(kdIntention['kdWordslots'])}
+                        // onSubmit={kdIntention.status == 'confirm' ? () => this.handleDialogSubmit(item) : null}
+                        onSubmit={ () => {console.log('点击了查看详情')} }
+
+                        imgPath={imgPath}
+                        loaded={this.state.loaded}
+                        showMasker={this.state.showMasker}
+                        isFinished={true}
+                        onSubmitStr={'查看详情1'}
                 >
-               {item.type=='URL' ? this[urlMapping[kdIntention['intention']]] : null}
+                    {item.type == 'URL' ? this[urlMapping[kdIntention['intention']]] : null}
               </TypeIn>
+
+              <TypeIn ref={el=>this.wrapper2=el} showBody={false} say="您什么时候回来呢？" className={`ai-ti-demo`}>
+
+              </TypeIn>
+              <BackIcon onIconClick={this.handleMainpageClick} visible={true}/>
+              <Loading londingStr={'正在跳转...'} visible={false}>
+                  
+              </Loading>
             </div>
 		)
 	}
@@ -139,7 +167,7 @@ class DialogPage extends Component{
 export default DialogPage;
 
 /*
-*        <RecommendCard data={this.data} className={'ai-rc-card'} desc={'请问我能帮您做点什么?'}></RecommendCard>
+*        <RecommendCard data={this.data} className={'ai-rc-card'} desc={'Hi~我是小K,下面是我学会的技能,快让我表演给你看吧?'}></RecommendCard>
 	               // <div className={`loc ${b_loc!=SOURCE_ADDRESS ? 'loc_fill' : ''}`}>{b_loc}</div>
 	               // <div className={`loc ${b_loc!=TARGET_ADDRESS ? 'loc_fill' : ''}`}>{e_loc}</div>
 

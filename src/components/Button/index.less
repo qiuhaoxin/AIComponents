@@ -1,0 +1,27 @@
+.keyframes(@name; @arguments) {
+	@-moz-keyframes @name { @arguments(); }
+	@-webkit-keyframes @name { @arguments(); }
+	@keyframes @name { @arguments(); }
+}
+.animation(@arguments) {
+	-webkit-animation: @arguments;
+	-moz-animation: @arguments;
+	animation: @arguments;
+}
+.ai-btn-wrapper{
+	display:inline-flex;
+	& .ai-btn-btn{
+	   padding:8px 14px;border-radius:15px;line-height:14px;color:#fff;font-size:14px;
+       &.ai-btn-ani{
+           .keyframes(fade,{
+             0%{opacity:1;} 
+             50%{opacity:0.5;}
+             100%{opacity:1;}
+           });
+          .animation(fade .3s linear);
+       }
+       &.ai-btn-change{
+          background-color:rgba(0,0,0,.1) !important;color:#fff !important;
+       }
+	}
+}

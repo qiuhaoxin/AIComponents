@@ -41,6 +41,9 @@ module.exports={
                	 loader:'less-loader',
                }
           	],
+          },{
+            test:/\.(png|jpe?g|git|svg)$/,
+            loader:'url-loader'
           }
        ]
 	},
@@ -65,6 +68,6 @@ module.exports={
       commonjs:'immutable',
       amd:'immutable',
       root:'immutable',
-    }
+    },
 	}
 }

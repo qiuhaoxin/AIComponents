@@ -1,4 +1,4 @@
-/*
+ /*
 * description:数字卡片
 * author:haoxin_qiu
 * createtime:2018-09-14
@@ -17,6 +17,8 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import {fromJS,is} from 'immutable';
 import './index.less';
+import Comment from '../Comment';
+import {Answer} from '../Answer';
 
 const prefixCls="ai-nc1";
 class NumberCard extends Component{
@@ -97,7 +99,7 @@ class NumberCard extends Component{
         )
     }
 	render(){
-		const {className,style,selfStr,data}=this.props;
+		const {className,style,selfStr,data,answerStyle}=this.props;
 		const classNames=ClassNames({
             [`${className}`]:className,
 		}
@@ -106,15 +108,16 @@ class NumberCard extends Component{
     const ratioDetail=data.ratioDetail;
 		return (
            <div className={classNames} style={style}>
-               <div>
-                   {selfStr}
-               </div>
-               <div className={`${prefixCls}-desc`}>
-                  {data.desc}
-               </div>
+               <Answer str={data.desc} style={answerStyle}></Answer>
                {
                   numeralDetail && numeralDetail.length==1 && ratioDetail && ratioDetail.length==1 ? this.renderOneRow() : this.renderTwoRow()
                }
+               {
+                  React.Children.map(this.props.children,function(child){
+                      return <div>{child}</div>
+                  })
+               }
+              
            </div>
 		)
 	}
@@ -128,4 +131,9 @@ NumberCard.defaultProps={
 
 }
 export default NumberCard;
+/**
+ *                // <div className={`${prefixCls}-desc`}>
+               //    {data.desc}
+               // </div>
+ */
 

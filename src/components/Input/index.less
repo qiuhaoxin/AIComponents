@@ -1,0 +1,74 @@
+.ai-input-wrapper {
+  display: flex;
+  font-family: PingFangSC-Regular;padding-top:20px;padding-bottom:10px;
+  box-sizing: border-box;-webkit-appearance: none;flex-direction:  row-reverse ;appearance: none;
+  & .ai-input-content {
+    box-sizing: border-box;
+    display:inline-block;
+    text-align: right;
+    border-radius: 20px 0 20px 20px;
+    background: linear-gradient(to left, #597cfc, #4598f0);
+    width: fit-content;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;      color: #FFFFFF ;
+    box-shadow: 0 2px 8px 0 #C3D3E4;
+    & .ai-input-input{
+         padding:13px 16px 12px 16px;font-size:15px;line-height:15px;
+    }
+    & .ai-input-edit-input {
+      margin-top: 6px;
+      margin-bottom: 6px;
+      height: 18px;
+      line-height: 18px;
+    }
+
+    &.ai-input-show {
+      //border: 1px solid #eee;
+      //border-radius: 8px;
+
+      background: #eef2fb;
+      width: 100%;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-right: 20px;
+      & > input, & > textarea {
+        text-align: right;
+        background: #eef2fb;
+
+      }
+      & > textarea::selection {
+        background: #a5d2fc;
+      }
+    }
+    &.ai-input-hide {
+      border: none;
+      & > input, & > textarea {
+        text-align: right;
+      }
+    }
+    & > input, & > textarea {
+      width: 100%;
+      font-family: PingFangSC-Regular;
+      font-size: 16px;
+      color: #333;
+      text-align: right;
+      line-height: 22px;
+      border: none;
+      outline: none;
+    }
+    & .ai-input-write {
+
+    }
+    & .ai-input-read {
+      border: none;
+      outline: none;
+    }
+  }
+  & .ai-input-tip {
+    & > span > img {
+      height: 11px;
+      width: 11px;
+      margin-left: 5px;
+    }
+  }
+}

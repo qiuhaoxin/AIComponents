@@ -9,6 +9,11 @@ import ExpandListPage from '../pages/ExpandList/index.js';
 import NumberCardPage from '../pages/NumberCard/index.js';
 import VoiceReceivePage from '../pages/VoiceReceive/index.js';
 import Iscroll from '../pages/Iscroll/index.js';
+import InputPage from '../pages/Input/index.js';
+import RecommendPage from '../pages/Recommend/index.js';
+import Input from '../pages/InputSample/index'
+
+import SingleRecommend from '../pages/SingleRecommend/index'
 class Router extends Component{
     constructor(props){
     	super(props);
@@ -24,6 +29,10 @@ class Router extends Component{
                 <Route path="/ExpandList" component={ExpandListPage} />
                 <Route path="/VoiceReceive" component={VoiceReceivePage} />
                 <Route path="/Iscroll" component={Iscroll} />
+                <Route path='/input' component={InputPage} />
+                <Route path='/SingleRecommend' component={SingleRecommend} />
+                <Route path='/Recommend' component={RecommendPage} />
+                <Route path='/InputSample' component={Input} />
 	          </Switch>
 	       </HashRouter>
       )
