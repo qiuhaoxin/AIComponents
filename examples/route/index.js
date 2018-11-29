@@ -12,6 +12,8 @@ import Iscroll from '../pages/Iscroll/index.js';
 import InputPage from '../pages/Input/index.js';
 import RecommendPage from '../pages/Recommend/index.js';
 import Input from '../pages/InputSample/index'
+import DotDymEffectPages from '../pages/DotDymEffectPages/index'
+
 
 import SingleRecommend from '../pages/SingleRecommend/index'
 class Router extends Component{
@@ -33,6 +35,8 @@ class Router extends Component{
                 <Route path='/SingleRecommend' component={SingleRecommend} />
                 <Route path='/Recommend' component={RecommendPage} />
                 <Route path='/InputSample' component={Input} />
+                <Route path='/dotdotdot' component={DotDymEffectPages} />
+
 	          </Switch>
 	       </HashRouter>
       )

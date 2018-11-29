@@ -11,6 +11,7 @@ class SuperComponent extends Component{
        this.startX=point.pageX;
        this.startY=point.pageY;
        this.move=false;
+       this.startTime=e.tiemstamp || Date.now();
 	}
 	handleTouchMove=(e)=>{
        //move 

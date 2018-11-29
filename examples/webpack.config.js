@@ -11,7 +11,7 @@ module.exports={
        path:path.resolve(__dirname,'dist'),
        filename:'[name].js',
 	},
-  deltool:'clean-module-eval-sourcemap',
+  devtool:'clean-module-eval-sourcemap',
 	module:{
 		rules:[
           {

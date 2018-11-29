@@ -22,6 +22,7 @@
     "less-loader": "^4.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.0",
+    "react-bodymovin": "^2.0.0",
     "react-dom": "^16.5.0",
     "reactjs-iscroll": "^0.3.2",
     "style-loader": "^0.23.0",
