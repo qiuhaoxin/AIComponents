@@ -11,9 +11,10 @@ import SlideListT from './SlideList.js';
 const prefixCls="ai-sl";
 const arr=[
    {id:1,value:[{id:1,value:'财务收款'},{id:2,value:'应收账款'},{id:3,value:'营业收入'},{id:4,value:'现金'},{id:5,value:'利润总额'}]},
-   {id:2,value:[{id:1,value:'财务收款2'},{id:2,value:'应收账款2'},{id:3,value:'营业收入'},{id:4,value:'现金2'},{id:5,value:'利润总额2'}]},
+   {id:2,value:[{id:1,value:'财务收款2'},{id:2,value:'应收账款2'},{id:3,value:'营业收入2'},{id:4,value:'现金2'},{id:5,value:'利润总额2'}]},
    {id:3,value:[{id:1,value:'财务收款3'},{id:2,value:'应收账款3'},{id:3,value:'营业收入3'},{id:4,value:'现金3'},{id:5,value:'利润总额3'}]},
    {id:4,value:[{id:1,value:'财务收款4'},{id:2,value:'应收账款4'},{id:3,value:'营业收入4'},{id:4,value:'现金4'},{id:5,value:'利润总额4'}]},
+   {id:5,value:[{id:1,value:'财务收款5'},{id:2,value:'应收账款5'},{id:3,value:'营业收入5'},{id:4,value:'现金5'},{id:5,value:'利润总额5'}]},
 ];
 class SlideList extends SuperComponent{
 	constructor(props){
@@ -25,10 +26,16 @@ class SlideList extends SuperComponent{
        this.isMove=true;
 	}
 	componentDidMount(){
-       this.slideList=new SlideListT(this.wrappr,{
-       	  data:arr,
-       })
+       if(!this.slideList){
+         this.slideList=new SlideListT(this.wrappr,{
+            data:arr,
+         })
+         this.slideList.on('click',this.handleClickItem);
+       }
 	}
+  handleClickItem=(text)=>{
+     console.log("you click item is "+text);
+  }
 	handleTouchMove=(e)=>{
        const point=e.touches ? e.touches[0] : e;
        const pageX=point.pageX,pageY=point.pageY;
@@ -41,10 +48,10 @@ class SlideList extends SuperComponent{
        }
 	}
 	getTarget=()=>{
-		const curPageIdx=this.curPageIdx;
-		if(this.distTargetX==0){
-			this.distTargetX=-315 * this.direction;
-		}
+    		const curPageIdx=this.curPageIdx;
+    		if(this.distTargetX==0){
+    			this.distTargetX=-315 * this.direction;
+    		}
         if(this.direction==-1){
         	//左滑
         	if(this.curPageIdx==arr.length - 1){
@@ -188,8 +195,3 @@ SlideList.propTypes={
 
 }
 export default SlideList;
-
-/**
- *                // {this.renderPages()}
-               // {this.renderDecoration()}
- */

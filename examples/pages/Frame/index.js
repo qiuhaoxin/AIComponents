@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import './index.less';
 import Frame from '../../../src/components/Frame';
 import SlideList from '../../../src/components/SlideList';
+import {WaitingLoading2} from '../../../src/components/WaitingLoading2';
 
 class FramePage extends Component{
 	constructor(props){
@@ -19,7 +20,7 @@ class FramePage extends Component{
 		return (
             <div>
                <SlideList style={{marginLeft:30,marginRight:30,marginTop:30}}></SlideList>
-	 
+	           <WaitingLoading2></WaitingLoading2>
             </div>
 		)
 	}
