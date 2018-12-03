@@ -5,7 +5,7 @@
    }
 */
 import React from 'react';
-import BackImg from '../../images/backhome_icon@2x.png';
+import BackImg from '../../images/backhome_icon_new.png';
 import './index.less';
 const prefixCls=`ai-bi`;
 export const BackIcon=(props)=>{

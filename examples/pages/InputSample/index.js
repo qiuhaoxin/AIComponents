@@ -13,6 +13,7 @@ class InputSample extends Component {
             <div className={'content'}>
                 hello world
                 <Input
+                    canEdit={true}
                        text={'我明天去北京'}
                        afterEnter={(inputValue, oldValue) => {
                            console.log("inputValue is : " + JSON.stringify(inputValue))

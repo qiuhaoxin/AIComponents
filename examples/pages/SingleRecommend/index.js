@@ -2,6 +2,9 @@ import React,{Component} from 'react';
 import './index.less';
 import SingleRecommend from '../../../src/components/SingleRecommend';
 
+import chailv from '../../images/image_chailv.png'
+import caiwu from '../../images/image_caiwu.png'
+
 class NumberCardPage extends Component{
 	constructor(props){
 		 super()
@@ -16,7 +19,13 @@ class NumberCardPage extends Component{
 		return (
             <div className={'content'}>
 				hello world
-				<SingleRecommend appTitle={appTitle} appMessage={appMessage}/>
+				<SingleRecommend bgImg={chailv}  appTitle={appTitle} appMessage={appMessage}/>
+
+
+				<SingleRecommend bgImg={caiwu}  appTitle={appTitle} appMessage={appMessage}/>
+
+
+
 			</div>
 		)
 	}

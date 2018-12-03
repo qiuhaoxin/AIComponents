@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import './index.less';
- import ReactBodymovin from 'react-bodymovin'
-import _3dot from "./_3dot.json";
-import {Answer} from "../Answer";
+// import './index.less';
+  import {Answer} from "../Answer";
+import {WaitingLoading2} from "../WaitingLoading2";
 
 class DotDymEffect extends Component {
     constructor(props) {
@@ -10,18 +9,10 @@ class DotDymEffect extends Component {
     }
 
     render() {
-        const dotDymEffect = {
-            loop: true,
-            autoplay: true,
-            prerender: true,
-            animationData: _3dot
-        }
-
-        let r = <ReactBodymovin options={dotDymEffect}/>
-
+        let w = <WaitingLoading2/>
         return (
             <div className={'content'}>
-                <Answer style={{height: '12px', width: '36px', paddingTop: '14px', paddingBottom: '14px'}} str={r}/>
+                <Answer style={{paddingTop: '16px', paddingBottom: '16px',paddingLeft:'15px',paddingRight:'15px'}} str={w}/>
             </div>
         )
     }

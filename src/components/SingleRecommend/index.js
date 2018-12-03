@@ -3,8 +3,8 @@ import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import './index.less';
 import {fromJS, is} from 'immutable';
-import Styles from './index.less';
-import Answer from '../Answer';
+
+
 
 class SingleRecommendCard extends Component {
     constructor(props) {
@@ -18,7 +18,6 @@ class SingleRecommendCard extends Component {
     preHandleAppMessage(appMessage) {
 
         appMessage =  JSON.parse(JSON.stringify(appMessage))
-        console.log("appMessage is "+JSON.stringify(appMessage));
         // if (appMessage.length == 0){
         //     appMessage.push(' 当前意图没有配置提示语! ')
         // }
@@ -30,7 +29,7 @@ class SingleRecommendCard extends Component {
         for (let i = 0; i < appMessage.length; i++) {
 
             if (appMessage[i].length > 18){
-                appMessage[i] = appMessage[i].slice(0,18)+"..."
+                appMessage[i] = appMessage[i].slice(0, 18) + "..."
             }
 
             if (appMessage[i] != '~') {
@@ -41,8 +40,7 @@ class SingleRecommendCard extends Component {
         return appMessage.slice(0,3)
     }
     render() {
-        console.log("SingleRecommendCard render!");
-        const {className, style, appTitle, appMessage} = this.props;
+        const {className,bgImg, style, appTitle, appMessage} = this.props;
 
 
         let sampleList = this.preHandleAppMessage(appMessage);
@@ -53,12 +51,14 @@ class SingleRecommendCard extends Component {
             },
             ['ai-srcs-wrapper']
         )
+        const imgPath="../../images/singleRecommandBg.png";
         return (
-            <div style={style}  className={outer_css}>
+            <div style={{...style, backgroundImage: `url(${bgImg})`, backgroundSize: '80px 80px'}} className={outer_css}>
                 <div className={['ai-srcs-title']}>
                     {appTitle}
                 </div>
-                <div className={['ai-srcs-list']}>
+
+                <div className={['ai-srcs-list']} >
                     <ul>
                         {
                             sampleList.map((item) => <li key={item}>{item}</li>)

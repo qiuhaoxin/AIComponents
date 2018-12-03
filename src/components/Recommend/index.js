@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import './index.less';
 import {fromJS,is} from 'immutable';
 import Button from '../Button';
-import {Answer} from '../Answer';
+// import {Answer} from '../Answer';
 const prefixCls="ai-rc";
 class RecommendCard extends Component{
 	constructor(props){
@@ -71,7 +71,7 @@ class RecommendCard extends Component{
 		return (
            <div style={style} className={classNames}>
                {
-                  desc ? <Answer style={{marginBottom:8,lineHeight:'23px',marginTop:30,padding:'8px 12px 8px 16px'}} str={desc}></Answer> : null
+                  // desc ? <Answer style={{marginBottom:8,lineHeight:'23px',marginTop:30,padding:'8px 12px 8px 16px'}} str={desc}></Answer> : null
                }
                <div className={`${prefixCls}-box`}>
                  {this.renderAPPList()}

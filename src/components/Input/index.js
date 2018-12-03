@@ -57,7 +57,7 @@ class Input extends SuperComponent{
 				    afterEnter && afterEnter(inputVal,_this.oldValue);
 
 				    if (inputVal == undefined || inputVal == ''){
-				    	console.log('修改值不能为空!')
+				    	console.log('修改值不能为空!-滑动')
 				    	this.setState({
                             inputVal:_this.oldValue
                         })
@@ -90,7 +90,7 @@ class Input extends SuperComponent{
 				    afterEnter && afterEnter(inputVal,_this.oldValue);
 
                     if (inputVal == undefined || inputVal == ''){
-                        console.log('修改值不能为空!')
+                        console.log('修改值不能为空!-回车')
                         this.setState({
                             inputVal:_this.oldValue
                         })

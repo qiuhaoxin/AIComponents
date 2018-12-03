@@ -9,6 +9,9 @@ const prefixCls="ai-wt2";
 export const WaitingLoading2=(props)=>{
     
 	return (
+
+
+
        <div className={`${prefixCls}-wrapper`}>
           <div className={`${prefixCls}-loading`}>
 

@@ -44,3 +44,4 @@ export {WaitingLoading} from './components/WaitingLoading';
 export {WaitingLoading2} from './components/WaitingLoading2';
 
 export {default as SlideList} from './components/SlideList';
+

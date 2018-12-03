@@ -30,6 +30,7 @@
          this.ULWrapper.className=this.prefixCls+"-inner";
          this.options.data.forEach(function(item,index){      
            _this['list-'+index]=document.createElement('LI');
+           _this['list-'+index].setAttribute('id',item.id);
            if(index==_this.curPageIdx)_this['list-'+index].style['transform']="translate3d(0,0,0)";
            else _this['list-'+index].style['transform']="translate3d("+315+"px,0,0)";
                 
@@ -75,7 +76,7 @@
            item.value.forEach(function(itemData){
            	  _this.innerLI=document.createElement('LI');
            	  _this.innerLI.innerHTML=itemData.value;
-              _this.innerLI.setAttribute('id','innerList'+itemData.id);
+              _this.innerLI.setAttribute('id','innerList-'+itemData.id);
            	  _this.innerWrapper.appendChild(_this.innerLI);
 
            })
@@ -124,8 +125,19 @@
           }
           if(!this.isMove || (Math.abs(distanceX) <6 && Math.abs(distanceY) < 6)){
              if('click' in this.events && this.events.click){
+                let pageIndex=0;
                 const target=e.target;
-                this.events.click.call(this,target.innerText);
+                let parent=target && target.parentNode;
+                if(parent && parent.nodeName!='LI'){
+                   parent=parent && parent.parentNode;
+                }
+                if(parent.nodeName=='LI' && parent.getAttribute('id')){
+                   pageIndex=parent.getAttribute('id');
+                }
+                let id=target.getAttribute('id');
+                id=id && id.split('-')[1];
+                console.log("parent nodeType is "+pageIndex+"and id is "+id);
+                this.events.click.call(this,target.innerText,id);
              }
           }
           this.reset();
@@ -177,9 +189,11 @@
 	        }
 	    },
       _transitionEnd:function(){
+
           for(let i=0,len=this.options.data.length;i<len;i++){
              this['list-'+i].style['transition']='';
           }
+          this.events['pageChange'] && this.events['pageChange'](this.curPageIdx);
       },
       //对外开放的接口   绑定事件
       on:function(eventName,eventFn){
