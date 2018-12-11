@@ -46,6 +46,13 @@ class MainPage extends Component{
                 <div>
                     <Link to="/dotdotdot">DotDymEffect</Link>
                 </div>
+                <div>
+                    <Link to="/Feedback">Feedback</Link>
+                </div>
+                
+                <div>
+                    <Link to="/voiceLoading">voiceLoading</Link>
+                </div>
             </div>
 		)
 	}

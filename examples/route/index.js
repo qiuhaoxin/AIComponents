@@ -13,7 +13,8 @@ import InputPage from '../pages/Input/index.js';
 import RecommendPage from '../pages/Recommend/index.js';
 import Input from '../pages/InputSample/index'
 import DotDymEffectPages from '../pages/DotDymEffectPages/index'
-
+import FeedbackPages   from '../pages/FeedbackPages/index';
+import VoiceLoadingPage from '../pages/VoiceLoading/index';
 
 import SingleRecommend from '../pages/SingleRecommend/index'
 class Router extends Component{
@@ -36,7 +37,8 @@ class Router extends Component{
                 <Route path='/Recommend' component={RecommendPage} />
                 <Route path='/InputSample' component={Input} />
                 <Route path='/dotdotdot' component={DotDymEffectPages} />
-
+                <Route path='/feedback' component={FeedbackPages} />
+                <Route path='/voiceLoading' component={VoiceLoadingPage} />
 	          </Switch>
 	       </HashRouter>
       )

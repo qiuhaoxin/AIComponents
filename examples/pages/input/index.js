@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import './index.less';
 import {Dialog,Input,Exception,Button,URL,Comment,Answer,WaitingLoading} from '../../../src/index.js';
+import WaitingLoading3 from "../../../src/components/WaitingLoading3";
 class InputPage extends Component{
     constructor(props){
     	super(props);
@@ -47,6 +48,9 @@ class InputPage extends Component{
                <Comment></Comment>
                <Answer style={{lineHeight:'23px',padding:'8px 12px 8px 16px'}} str={`Hi~我是小K,下面是我学会的技能，快让我表演给你看吧`}></Answer>
                <WaitingLoading></WaitingLoading>
+
+               <WaitingLoading3/>
+
            </div>
     	)
     }

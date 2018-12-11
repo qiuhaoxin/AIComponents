@@ -14,7 +14,7 @@ class InputSample extends Component {
                 hello world
                 <Input
                     canEdit={true}
-                       text={'我明天去北京'}
+                       text={'我明天去北京哈哈'}
                        afterEnter={(inputValue, oldValue) => {
                            console.log("inputValue is : " + JSON.stringify(inputValue))
                            console.log("oldValue is : " + JSON.stringify(oldValue))

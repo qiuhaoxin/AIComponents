@@ -1,6 +1,5 @@
 
 
-
 export {default as Dialog} from './components/Dialog';
 
 export {default as RecommendCard} from './components/Recommend';
@@ -43,5 +42,12 @@ export {WaitingLoading} from './components/WaitingLoading';
 
 export {WaitingLoading2} from './components/WaitingLoading2';
 
+export {default as WaitingLoading3} from './components/WaitingLoading3';
+
 export {default as SlideList} from './components/SlideList';
 
+export {default as VoiceLoading} from './components/VoiceLoading';
+
+export {default as Feedback} from './components/Feedback';
+
+export {default as StarRate} from './components/StarRate'

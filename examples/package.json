@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./start.js"
+    "start": "node ./start.js",
+    "build": "node ./build.js"
   },
   "author": "haoxin_qiu",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "react-bodymovin": "^2.0.0",
     "react-dom": "^16.5.0",
     "react-router-dom": "^4.3.1",
+    "react-stars": "^2.2.5",
     "reactjs-iscroll": "^0.3.2",
     "url-loader": "^1.1.1",
     "webpack-dev-server": "^3.1.8"
@@ -27,11 +29,15 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "chalk": "^2.4.1",
+    "clean-webpack-plugin": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "open-browser-webpack-plugin": "0.0.5",
     "style-loader": "^0.23.0",
+    "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.18.1"
   }
 }

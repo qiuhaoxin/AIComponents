@@ -26,7 +26,7 @@
     	init:function(){
     	   const _this=this;
     	   if(this.options.data && this.options.data.length==0)return;
-         this.ULWrapper=document.createElement('UI');
+         this.ULWrapper=document.createElement('UL');
          this.ULWrapper.className=this.prefixCls+"-inner";
          this.options.data.forEach(function(item,index){      
            _this['list-'+index]=document.createElement('LI');
@@ -73,11 +73,19 @@
     	createEachPageItem:function(item,container){
     		const _this=this;
            this.innerWrapper=document.createElement('UL');
-           item.value.forEach(function(itemData){
+           this.innerWrapper.className=this.prefixCls+"-page";
+           item.value.forEach(function(itemData,index){
            	  _this.innerLI=document.createElement('LI');
            	  _this.innerLI.innerHTML=itemData.value;
               _this.innerLI.setAttribute('id','innerList-'+itemData.id);
            	  _this.innerWrapper.appendChild(_this.innerLI);
+              //console.log("index is "+index+" and lenghth is "+item.value.length);
+              if(index!=item.value.length - 1){
+                  var lineDiv=document.createElement('DIV');
+                  lineDiv.className=_this.prefixCls+"-line";
+                  _this.innerWrapper.appendChild(lineDiv);
+              }
+
 
            })
            container.appendChild(this.innerWrapper);

@@ -36,7 +36,7 @@ class SuperComponent extends Component{
        const distanceX=endPageX - this.startX,
              distanceY=endPageY - this.startY;
        if(!this.move){
-       	  callback && callback();
+       	  callback && callback(e);
        }      
 	}
 	render(){

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './index.less';
 import {fromJS, is} from 'immutable';
 
-
+import defaultbBgImg from '../../images/image_zhibiao.png'
 
 class SingleRecommendCard extends Component {
     constructor(props) {
@@ -18,11 +18,16 @@ class SingleRecommendCard extends Component {
     preHandleAppMessage(appMessage) {
 
         appMessage =  JSON.parse(JSON.stringify(appMessage))
+
+        if (appMessage == null || appMessage == undefined){
+            appMessage = []
+        }
+
         // if (appMessage.length == 0){
         //     appMessage.push(' 当前意图没有配置提示语! ')
         // }
 
-        while (appMessage.length < 3 && appMessage.length != 0) {
+        while (appMessage.length < 3 ) {
             appMessage.push('~')
         }
 
@@ -51,8 +56,7 @@ class SingleRecommendCard extends Component {
             },
             ['ai-srcs-wrapper']
         )
-        const imgPath="../../images/singleRecommandBg.png";
-        return (
+         return (
             <div style={{...style, backgroundImage: `url(${bgImg})`, backgroundSize: '80px 80px'}} className={outer_css}>
                 <div className={['ai-srcs-title']}>
                     {appTitle}
@@ -61,7 +65,7 @@ class SingleRecommendCard extends Component {
                 <div className={['ai-srcs-list']} >
                     <ul>
                         {
-                            sampleList.map((item) => <li key={item}>{item}</li>)
+                            sampleList.map((item,index) => <li key={index}>{item}</li>)
                         }
                     </ul>
                 </div>
@@ -76,6 +80,7 @@ SingleRecommendCard.propTypes = {
 }
 SingleRecommendCard.defaultProps = {
     appMessage:null,
-    appTitle:null
+    appTitle:null,
+    bgImg:defaultbBgImg
 }
 export default SingleRecommendCard;

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './index.less';
 
-//import DotDymEffect from "../../../src/components/DotDymEffect";
-import _3dot from "../../../src/components/DotDymEffect/_3dot.json";
+//import WaitingLoading3 from "../../../src/components/WaitingLoading3";
+import _3dot from "../../../src/components/WaitingLoading3/_3dot.json";
 import ReactBodymovin from "react-bodymovin";
 import {Answer} from "../../../src/components/Answer";
 

@@ -124,7 +124,9 @@ class Input extends SuperComponent{
 	}
 	handleFocus=(e)=>{
         const {focusEvent}=this.props;
-        this.input.select()
+        // this.input.select()
+		const len = this.state.inputVal.length;
+        this.input.setSelectionRange(len, len)
         focusEvent && focusEvent();
 	}
 

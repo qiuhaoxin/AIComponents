@@ -27,7 +27,7 @@ class RecommendCard extends Component{
 		delete item.ficonpath;
         onItemClick && onItemClick(item);
 	}
-    renderAPPList=()=>{
+  renderAPPList=()=>{
     	const {data}=this.props;
     	const appListClass=ClassNames(`${prefixCls}-list`);
     	const appListStr=data.map((item,index)=>{

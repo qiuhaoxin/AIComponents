@@ -39,7 +39,7 @@ class NumberCard extends Component{
                           <div className={`${prefixCls}-numberalDetail-column-item`}>
                             {item.item}
                           </div>
-                          <div className={`${prefixCls}-numberalDetail-column-value`}>
+                          <div className={`${prefixCls}-numberalDetail-column-value`} style={{fontSize:20}}>
                             {item.value}
                           </div>
                        </li>)

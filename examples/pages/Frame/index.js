@@ -3,7 +3,8 @@ import './index.less';
 import Frame from '../../../src/components/Frame';
 import SlideList from '../../../src/components/SlideList';
 import {WaitingLoading2} from '../../../src/components/WaitingLoading2';
-import DotDymEffect from "../../../src/components/DotDymEffect";
+import WaitingLoading3 from "../../../src/components/WaitingLoading3";
+import VoiceLoading from  '../../../src/components/VoiceLoading';
 
 class FramePage extends Component{
 	constructor(props){
@@ -33,7 +34,8 @@ class FramePage extends Component{
                <SlideList style={{marginLeft:30,marginRight:30,marginTop:30}} data={this.data} text={'您要查询哪个组织的财务指标呢？'}
                onItemClick={this.handleClick} onPageChange={this.handlePageChange}></SlideList>
 	           <WaitingLoading2></WaitingLoading2>
-				<DotDymEffect/>
+			   <WaitingLoading3/>
+			   <VoiceLoading></VoiceLoading>
             </div>
 		)
 	}

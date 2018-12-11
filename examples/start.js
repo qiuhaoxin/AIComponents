@@ -22,6 +22,6 @@ webpackDevServer.addDevServerEntrypoints(webpackConfig,devServerOptions);
 
 const server=new webpackDevServer(compiler,devServerOptions);
 
-server.listen(DEFAULT_PORT,'127.0.0.1',()=>{
+server.listen(DEFAULT_PORT,'0.0.0.0',()=>{
 	console.log(`server is starting at port ${DEFAULT_PORT}`);
 })

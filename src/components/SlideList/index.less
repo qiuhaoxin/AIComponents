@@ -1,18 +1,18 @@
 .ai-sl-wrapper{
 	display: flex;background: #FFFFFF;box-shadow: 0 2px 8px 0 #C3D3E4;border-radius: 10px;height:250px;flex-direction: column;
-    margin-top: 8px;margin-bottom: 8px;
+    margin-top: 8px;margin-bottom: 8px;overflow: hidden;
     & .ai-sl-inner{
     	overflow: hidden;width:315px;float:left;position: relative;flex-grow: 1;
     	& > li{
     		width:100%;list-style: none;float:left;position: absolute;top:0;height: 100%;
 
-    		& > ul{
-    			list-style: none;
+    		& > ul.ai-sl-page{
+    			list-style: none;overflow: hidden;
     			& > li{
     				padding:15px 0;width:100%;display: inline-flex;font-family: PingFangSC-Regular;font-size: 16px;color: #666;text-align: center;
                     line-height: 16px;justify-content: center;box-sizing: border-box;position: relative;
                     &:after{
-                      content:'';position: absolute;left:2px;right:2px;bottom:0;height: 1px;background: #e5e5e5;transform: scaleY(.5);
+                      content:'';position: absolute;left:6px;right:20px;bottom:0;height: 1px;background: #e5e5e5;transform: scaleY(.5);
                     }
 
                     &:last-child{
@@ -21,6 +21,9 @@
                        }
                     }
     			}
+                // & .ai-sl-line{
+                //     height: 1px;width:100%;background: #e5e5e5;transform:scaleY(.5);
+                // }
     		}
     	}
     }
