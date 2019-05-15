@@ -7,26 +7,15 @@ import React,{Component} from 'react';
 import './index.less';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
+import Answer from '../Answer';
 
 const prefixCls=`ai-noc`;
-const layoutData=[
-    {type:'1',layout:{
-    	title:[{id:0,key:'',vlaue:'title'}],
-        body:[],
-        footer:[{id:5,key:'数据统计截止:',value:'endDate'}],
-    },
-    {type:'2',layout:{
-    	title:[],
-    	body:[],
-    	footer:[],
-    }}
-]
 const data={
      title:'金蝶中国业绩总览',
      cardType:'one',
      bodyData:[
-        [numberDetail:[{key:'',value:''},{key:'',value:''}],radioDetail:{}],
-     ]
+        {numberDetail:[{key:'',value:''},{key:'',value:''}],radioDetail:{}},
+     ],
      updateTime:'2018.09.01',
 }
 const data2={
@@ -34,7 +23,7 @@ const data2={
      cardType:'two',
      bodyData:[
         [{key:'苍穹',value:'50%',id:0},{key:'星空',value:'70%',id:1}],
-     ]
+     ],
      updateTime:'2018.09.01',
 }
 const data3={
@@ -42,7 +31,7 @@ const data3={
      cardType:'three',
      bodyData:[
         [{key:'累计总数',value:'1000家',id:0},{key:'本年新增',value:'400家',id:1},{key:'同比增长',value:'40%',id:2}],
-     ]
+     ],
      updateTime:'2018.09.01',
 }
 
@@ -54,7 +43,6 @@ class NumberOneCard extends Component{
 		cardData:null,
 	}
 	componentDidMount(){
-		this.selectCardType();
 	}
 	getValue=(key)=>{
         
@@ -73,17 +61,17 @@ class NumberOneCard extends Component{
 
 	}
 	renderCardTwo=()=>{
-         const {bodyData}=this.props;
+         const {data:{bodyData}}=this.props;
 		 const className=`${prefixCls}-card-two`;
 		 const wrapperStr=bodyData.map(item=>{
             const liStr=item.map(itemData=>{
 
             	return <li key={itemData.id}>
                    <div>
-                       {key}
+                       {itemData.key}
                    </div>
                    <div>
-                       {value}
+                       {itemData.value}
                    </div>
             	</li>
             })
@@ -92,23 +80,24 @@ class NumberOneCard extends Component{
 		 	</ul>
 		 })
          return <div className={className}>
-            
+            {wrapperStr}
          </div>
 	}
 	renderCardThree=()=>{
 
 	}
 	renderBody=()=>{
-         const {cardType}=this.props;
+         const {data:{cardType}}=this.props;
+         console.log(`cardType `,cardType);
          switch(cardType){
          	case 'one':
-               this.renderCardOne();
+              return this.renderCardOne();
          	break;
          	case 'two':
-               this.renderCardTwo();
+               return this.renderCardTwo();
          	break;
          	case 'three':
-               this.renderCardThree();
+              return this.renderCardThree();
          	break;
          }
 	}
@@ -118,21 +107,24 @@ class NumberOneCard extends Component{
             <span>数据统计截止:</span><span>{endDate}</span>
         </div>
 	}
-	//选择要渲染卡片的类型，并获取卡片元数据
-	selectCardType=()=>{
-        const {type}=this.props;
-        const cardData=layoutData.filter(item=>item.type==type);
-        this.setState({
-        	cardData,
-        })
-	}
 	render(){
-		const {className,}
+		const {className,desc,answerStyle}=this.props;
         const wrapperCls=ClassNames({
           [className]:!!className,
         },`${prefixCls}-wrapper`)
 		return <div className={wrapperCls}>
-           
+           <Answer str={desc} style={answerStyle}></Answer>
+           <div className={`${prefixCls}-innerWrapper`}>
+               {
+               	  this.renderTitle()
+               }
+               {
+               	  this.renderBody()
+               }
+               {
+               	  this.renderFooter()
+               }
+           </div>
 		</div>
 	}
 }
