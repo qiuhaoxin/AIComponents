@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Answer} from "../Answer";
+import Answer from "../Answer";
 import {WaitingLoading2} from "../WaitingLoading2";
 
 class WaitingLoading3 extends Component {

@@ -20,7 +20,7 @@ export {default as Iscroll} from './components/Iscroll';
 
 export {default as Input} from './components/Input';
 
-export {BackIcon} from './components/BackIcon';
+export {default as BackIcon} from './components/BackIcon';
 
 export {default as VoiceReceive2} from './components/VoiceReceive2';
 
@@ -36,7 +36,7 @@ export {default as SingleRecommendCard} from './components/SingleRecommend';
 
 export {default as Comment} from './components/Comment';
 
-export {Answer} from './components/Answer';
+export {default as Answer} from './components/Answer';
 
 export {WaitingLoading} from './components/WaitingLoading';
 
@@ -50,4 +50,14 @@ export {default as VoiceLoading} from './components/VoiceLoading';
 
 export {default as Feedback} from './components/Feedback';
 
-export {default as StarRate} from './components/StarRate'
+export {default as StarRate} from './components/StarRate';
+
+export {default as StarRate1} from './components/StarRate1';
+
+export {default as NumberCardConfig} from './components/NumberCardConfig';
+
+export {default as BarChartCard} from './components/BarChartCard';
+
+export {default as GroupHistogramCard} from './components/GroupHistogramCard';
+
+export {default as NumberOneCard} from './components/NumberOneCard';

@@ -3,58 +3,63 @@ export const lineArr=[
                     x:400,
                     y:200,
                     width:12,
-                    height:0,//28
-                    fixHeight:1,
+                    height:28,//28
+                    fixHeight:7.5,
                     style:{
                       fill:'#7ACDFE',
                     },
                     weight:0.98,
-              },{
+              },
+              {
                     x:430,
                     y:200,
                     width:12,
-                    height:0,//18
-                    fixHeight:1,
+                    height:18,//18
+                    fixHeight:6,
                     style:{
                       fill:'#71B7FD',
                     },
                     weight:0.68
-             },{
+             },
+             {
                   x:460,
                     y:200,
                     width:12,
-                    height:0,
-                    fixHeight:1,//14
+                    height:8,
+                    fixHeight:4,//14
                     style:{
                       fill:'#68A3FD',
                     },
                     weight:0.36
-             },{
+             },
+             {
                   x:490,
                     y:200,
                     width:12,
-                    height:0,
-                    fixHeight:1,//9
+                    height:8,
+                    fixHeight:2.25,//9
                     style:{
                       fill:'#608EFC',
                     },
                     weight:0.14,
-             },{
-                  x:370,
+             },
+             {
+                    x:370,
                     y:200,
                     width:12,
-                    height:0,
-                    fixHeight:1,//24
+                    height:60,
+                    fixHeight:9,//24
                     style:{
                       fill:'#82E1FF',
                     },
-                    weight:1.72,
-             },{
+                    weight:1.42,
+             },
+             {
                   x:340,
                     y:200,
                     width:12,
-                    height:0,
-                    fixHeight:1,//28
+                    height:28,
+                    fixHeight:7.5,//28
                     style:{
                       fill:'#7ACDFE',
                     },
@@ -63,28 +68,30 @@ export const lineArr=[
                   x:310,
                     y:200,
                     width:12,
-                    height:0,
-                    fixHeight:1,//18
+                    height:18,
+                    fixHeight:6,//18
                     style:{
                       fill:'#71B7FD',
                     },
                     weight:0.68,
-             },{
+             },
+             {
                   x:280,
                     y:200,
                     width:12,
-                    height:0,
-                    fixHeight:1,//14
+                    height:8,
+                    fixHeight:4,
                     style:{
                       fill:'#68A3FD',
                     }, 
                     weight:.36,                 
-             },{
+             },
+             {
                   x:250,
                     y:200,
                     width:12,
-                    height:0,
-                    fixHeight:1,//9
+                    height:8, 
+                    fixHeight:2.25,//9
                     style:{
                       fill:'#608EFC',
                     },

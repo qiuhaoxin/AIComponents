@@ -144,7 +144,6 @@
                 }
                 let id=target.getAttribute('id');
                 id=id && id.split('-')[1];
-                console.log("parent nodeType is "+pageIndex+"and id is "+id);
                 this.events.click.call(this,target.innerText,id);
              }
           }

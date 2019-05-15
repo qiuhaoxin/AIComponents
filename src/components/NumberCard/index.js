@@ -18,7 +18,7 @@ import ClassNames from 'classnames';
 import {fromJS,is} from 'immutable';
 import './index.less';
 import Comment from '../Comment';
-import {Answer} from '../Answer';
+import Answer from '../Answer';
 
 const prefixCls="ai-nc1";
 class NumberCard extends Component{

@@ -129,9 +129,6 @@ class Feedback extends  SuperComponent {
                 </div>
 
                 <div
-                    onTouchStart={this.handleTouchStart}
-                    onTouchMove={this.handleTouchMove}
-                    onTouchEnd={(e)=>this.handleTouchEnd(e,this.handleSubmit.bind(this))}
                     className={`${prefixCls}-footer`}>
                     {submitStr}
                 </div>
@@ -150,3 +147,9 @@ class Feedback extends  SuperComponent {
 }
 
 export default Feedback;
+
+/**
+ *                    onTouchStart={this.handleTouchStart}
+                    onTouchMove={this.handleTouchMove}
+                    onTouchEnd={(e)=>this.handleTouchEnd(e,this.handleSubmit.bind(this))}
+ */

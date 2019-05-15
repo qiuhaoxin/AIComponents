@@ -1,0 +1,31 @@
+.gp-histogram- {
+
+}
+
+.gp-histogram-title {
+    height:16px;
+    font-size:16px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height:16px;
+    padding:  16px 0 0 16px;
+}
+
+.gp-histogram-wrapper {
+    width:315px;
+    height:275px;
+    background:rgba(255,255,255,1);
+    box-shadow:0 2px 8px 0 rgba(214,226,239,1);
+    border-radius:6px;
+}
+
+.gp-histogram-bottom-content{
+    height:13px;
+    font-size:10px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+    line-height:13px;
+    text-align: center;
+}

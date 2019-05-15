@@ -11,9 +11,11 @@
   "author": "haoxin_qiu",
   "license": "ISC",
   "dependencies": {
-    "aicomponents": "^1.7.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-react-app": "^3.1.2",
+    "@babel/plugin-transform-strict-mode": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-remove-strict-mode": "0.0.2",
+    "babel-preset-react-app": "^9.0.0",
     "file-loader": "^2.0.0",
     "iscroll": "^5.2.0",
     "prop-types": "^15.6.2",
@@ -27,7 +29,9 @@
     "webpack-dev-server": "^3.1.8"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "chalk": "^2.4.1",
     "clean-webpack-plugin": "^1.0.0",

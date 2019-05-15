@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './index.less';
-import ReactStars from 'react-stars'
+// import ReactStars from 'react-stars'
 import successImg from '../../images/image_success.png'
 import Feedback from "../../../src/components/Feedback";
-
+import StarRate from '../../../src/components/StarRate';
 const prefixCls = 'ai-fb';
 class FeedbackPages extends Component {
     constructor(props) {
@@ -14,7 +14,8 @@ class FeedbackPages extends Component {
         rate: 0,
         content: '全都是建议，全都是建议～',
         showMasker: false,
-        submitStr: '提交'
+        submitStr: '提交',
+        hasSubmit:false,
     }
 
     updateRate = (value) => {
@@ -61,7 +62,9 @@ class FeedbackPages extends Component {
             }, 500
         )
     }
+    updateRate=()=>{
 
+    }
     render() {
 
         // const showMasker = this.state.showMasker;

@@ -1,12 +1,14 @@
 import React,{Component} from 'react';
- import {Dialog,TypeIn,RecommendCard,BackIcon,Loading} from '../../../src/index.js';
-//import  {Dialog,RecommendCard} from 'aicomponents';
+ import {Dialog,TypeIn,RecommendCard,BackIcon,Loading,StarRate,Answer} from '../../../src/index.js';
+
+// import  {Dialog,RecommendCard} from 'aicomponents';
 import './index.less';
 
 import chailubiaozhun from '../../images/chailubiaozhun.png';
 import chuchashenqing from '../../images/chuchashenqing.png';
 import xiechengshanglu from '../../images/xiechengshanglu.png';
 import imgPath from '../../images/bus.png';
+import StarRate1 from '../../../src/components/StarRate1';
 const DIALOG_TITLE="出差事由";
 const urlMapping={
   'BUS_TRIP':'renderExtendBus_tip'
@@ -34,6 +36,8 @@ class DialogPage extends Component{
 	state={
 		showMasker:false,
 		isLoaded:false,
+		rate:0,
+		hasSubmit:false,
     }
     handleDialogContent=(wordslot)=>{
 	    let b_loc=SOURCE_ADDRESS,e_loc=TARGET_ADDRESS,b_t=BEGIN_TIME,e_t=BACK_TIME;
@@ -117,6 +121,12 @@ class DialogPage extends Component{
 	handleMainpageClick=(e)=>{
 		console.log("handleMainpageClick");
 	}
+	updateRate=(rate)=>{
+        console.log("rate is "+rate);
+	}
+	handleAnswerClick=()=>{
+		console.log("hei answer!");
+	}
 	render(){
 		const item={
 			className:"chatbot-dialog","text":"您什么时候回来呢？",id:2,"kdIntention":{"intention":"BUS_TRIP","intentionName":"出差申请",
@@ -126,8 +136,16 @@ class DialogPage extends Component{
 		}
 		const kdIntention=item['kdIntention'];
 		const reason="";
+		const {hasSubmit}=this.state;
 		return (
             <div>
+                <Answer style={{lineHeight:'23px',padding:'8px 12px 8px 16px'}} str={`Hi~我是小K,下面是我学会的技能，快让我表演给你看吧`}
+                   onClick={this.handleAnswerClick} canClick={true}
+                ></Answer>
+                <StarRate1
+                    count={5}
+
+                />
               <RecommendCard data={this.data} className={'ai-rc-card'} desc={'Hi~我是小K,下面是我学会的技能,快让我表演给你看吧?'}></RecommendCard>
               <div onClick={this.handleLoaded}>
                   loaded
@@ -141,7 +159,6 @@ class DialogPage extends Component{
                         say="您什么时候回来呢？"
                         kdIntention={kdIntention}
                         content={() => this.handleDialogContent(kdIntention['kdWordslots'])}
-                        // onSubmit={kdIntention.status == 'confirm' ? () => this.handleDialogSubmit(item) : null}
                         onSubmit={ () => {console.log('点击了查看详情')} }
 
                         imgPath={imgPath}

@@ -135,6 +135,15 @@
                 }else{
                     lineArr[i].height=lastHeight - this.options.changeL;
                 }
+                // lineArr[i].height+= lineArr[i].direction * this.options.changeL;
+                // if(lineArr[i].height > lineArr[i].maxHeight && lineArr[i].distM){
+                //     lineArr[i].direction=-1;
+                //     lineArr[i].distM=false;
+                // }else if(lineArr[i].height < lineArr[i].minHeight && !lineArr[i].distM){
+                //     lineArr[i].direction=1;
+                //     lineArr[i].distM=true;
+
+                // }
             }
             this.drawLines();
             this.rAFId=window.rAF(this.startVoiceAnim.bind(this));
@@ -154,30 +163,22 @@
         _clearRect:function(){
             this.canvasCtx.clearRect(0,0,this.options.width * 2,this.options.height * 2);
         },
-        // startAnim:function(){
-        //    this._clear();
-        //    this.height=this.height + this.direction * 1.2;
-        //    if(this.height  > this.maxHeight && this.distM){
-        //       this.direction=-1;
-        //       this.distM=false;
-        //    }
-        //    if(this.height < this.minHeight && !this.distM){
-        //       this.direction=1;
-        //       this.distM=true;
-        //    }
-        //    this.drawLine();
-        //    window.rAF(this.startAnim.bind(this));
-        // },
         setWeight:function(voice){
             var _this=this;
-            //setInterval(function(){
-              if(voice){
-                _this.random=voice * 80;
+              if(voice!=0){
+                voice=voice * Math.random() ;
+                if(voice < 0.1){
+                  _this.random=voice * 60;
+                  this.options.changeL=voice + 0.8; //+ 0.6;
+                }else{
+                  _this.random=voice * 15;
+                  this.options.changeL=voice + 1.6; //+ 1.4;
+                }
               }else{
-                var random=Math.random();
-                 _this.random=(1 + random);
+                this.random=0;
+                this.options.changeL=2;
+                this.stopAnim();
               }
-            //},120);
         },
         on:function(eventName,fn){
             this._events[eventName]=fn;
@@ -206,16 +207,13 @@
           }
         },
         isInImage:function(pageX,pageY){
-          console.log("pageX is "+pageY+" and clineRect is "+JSON.stringify(this.clientRect));
            pageY-=this.clientRect.top;
-
            var imgWidth=this.img && this.img.width;
            var imgHeight=this.img && this.img.height;
            var beginX=this.options.width - this.img.width / 2;
            var beginY=this.options.height - this.img.height / 2;
            var endX=this.options.width + this.img.width / 2;
            var endY=this.options.height + this.img.height / 2;
-
            pageX*=2;
            pageY*=2;
            if(this.mode==0){

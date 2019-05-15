@@ -9,10 +9,19 @@ class MainPage extends Component{
 		return (
             <div>
                   <div>
-                      <Link to="/Dialog">Dialog</Link>
+                      
                   </div>
-                  <div>
-					            <Link to="/Frame">Frame</Link>
+            </div>
+		)
+	}
+}
+
+export default MainPage;
+
+/**
+ * <Link to="/Dialog">Dialog</Link>
+ *                   <div>
+                      <Link to="/Frame">Frame</Link>
                   </div>
                   <div>
                       <Link to="/NumberCard">NumberCard</Link>
@@ -53,9 +62,10 @@ class MainPage extends Component{
                 <div>
                     <Link to="/voiceLoading">voiceLoading</Link>
                 </div>
-            </div>
-		)
-	}
-}
-
-export default MainPage;
+                <div>
+                    <Link to="/numberCardConfig">numberCardConfig</Link>
+                </div>
+                <div>
+                    <Link to="/chart">chart</Link>
+                </div>
+ */

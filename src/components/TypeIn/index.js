@@ -91,8 +91,10 @@ class TypeIn extends SuperComponent{
     		return null;
     	}
   }
+  
 	render(){
-		const {style,className,title,visible,content,children,say,kdIntention,imgPath,finishImg,isFinished,showBody,showMasker,status}=this.props;
+		const {style,className,title,visible,content,children,say,kdIntention,imgPath,finishImg,isFinished,showBody,showMasker,status,sayStyle,
+      maskerTip}=this.props;
     if(showMasker)this.createCircle();
 		const wrapperCls=`${prefixCls}-dialog`;
 		const ClassName=ClassNames({
@@ -106,7 +108,7 @@ class TypeIn extends SuperComponent{
 		return (
           <div className={`${ClassName}`}>
             {
-                say ? <div className={`${prefixCls}-say`}><img style={{display:status ? 'inline-flex' : 'none'}} src={status=='success' ? successImg : errorImg}/><span>{say}</span></div> : null
+                say ? <div className={`${prefixCls}-say`} style={sayStyle}><img style={{display:status ? 'inline-flex' : 'none'}} src={status=='success' ? successImg : errorImg}/><span>{say}</span></div> : null
             }
             {
                showBody==false ? null 
@@ -128,7 +130,7 @@ class TypeIn extends SuperComponent{
                          </div>
                       </div>
                       <div className={`${prefixCls}-tip`}>
-                           提交中...
+                           {maskerTip}
                       </div>
                   </div>
                 </div> 
@@ -147,6 +149,7 @@ TypeIn.propTypes={
    showMasker:PropTypes.bool,//是否显示卡片上的遮罩层
    imgPath:PropTypes.string,//标题上的图标
    status:PropTypes.string,//desc 的图标  'success':提交成功，'error':'词槽填充失败','':正常
+   maskerTip:PropTypes.string,//特效提示语
 }
 TypeIn.defaultProps={
    title:'DialogHeader',
@@ -155,6 +158,7 @@ TypeIn.defaultProps={
    onEditStr:'修改',
    onSubmitStr:'提交',
    status:'',
+   maskerTip:'拼命处理中...',
 }
 export default TypeIn;
 

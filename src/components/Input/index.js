@@ -19,6 +19,7 @@ class Input extends SuperComponent{
 	state={
 		inputVal:'',
         readOnly:true,
+		textAreaHeight:18
 	}
 	componentWillReceiveProps(nextProps){
 
@@ -35,11 +36,15 @@ class Input extends SuperComponent{
 
 	}
 	handleInputChange=(e)=>{
-		const val=e.target.value;
+		let val=e.target.value;
+
+		val = val.replace(/[\r\n]/g,"")//去掉回车换行
+
 		this.setState({
 			inputVal:val,
 		})
 	}
+
 	docEvent=(e)=>{
 		const _this=this;
 		let {readOnly,inputVal}=this.state;
@@ -103,6 +108,13 @@ class Input extends SuperComponent{
 	}
 	handleClick=()=>{
 		const _this=this;
+
+
+		this.setState({
+			// div文字的总行数 乘上 textarea 的行高
+			textAreaHeight: 18 * (this.textContent.offsetHeight / 21)
+		})
+
 		const {inputVal}=this.state;
 		this.divHeight=this.divEl.clientHeight;
 		this.registerBodyListener();
@@ -140,12 +152,17 @@ class Input extends SuperComponent{
                     onTouchEnd={(e) => this.handleTouchEnd(e, this.handleClick)}
                     style={{display: readOnly ? 'block' : 'none'}}
                     ref={el => this.divEl = el}>
-            {inputVal}
-            <span className={`${prefixCls}-tip`} style={{visibility: readOnly ? 'visible' : 'hidden'}}>
+					<div className={`${prefixCls}-text-left`} ref={el=>this.textContent = el}>
+						{inputVal}
+					</div>
+					<div className={`${prefixCls}-icon-right`}>
+					<span className={`${prefixCls}-tip`} style={{visibility: readOnly ? 'visible' : 'hidden'}}>
 							<span>
  								<img src={editIcon}/>
                    	 		</span>
                			</span>
+					</div>
+
         </div>
     }
 
@@ -170,7 +187,7 @@ class Input extends SuperComponent{
 
                     {canEdit ? this.renderCanEditInput() : this.renderCantEditInput()}
 
-                    <textarea className={`${prefixCls}-edit-input`} style={{display: readOnly ? 'none' : 'block'}} ref={el => this.input = el} value={inputVal}
+                    <textarea className={`${prefixCls}-edit-input`} style={{display: readOnly ? 'none' : 'block',height:`${this.state.textAreaHeight}px`}} ref={el => this.input = el} value={inputVal}
                               onFocus={this.handleFocus}
                                onChange={this.handleInputChange} onKeyUp={this.handleKeyUp}/>
                 </div>

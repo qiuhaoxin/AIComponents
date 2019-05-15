@@ -73,6 +73,7 @@ class StarRate extends SuperComponent {
 
 
     clicked = (event) => {
+        console.log("starRate!");
         const {config} = this.state
         if (!config.edit) {
             return
@@ -89,7 +90,7 @@ class StarRate extends SuperComponent {
 
 
     renderStars() {
-        const {stars} = this.state
+        const {stars} = this.state;
         return stars.map((star, i) => {
             return (
                 <img
@@ -99,7 +100,7 @@ class StarRate extends SuperComponent {
                     data-index={i}
                     onTouchStart={this.handleTouchStart}
                     onTouchMove={this.handleTouchMove}
-                    onTouchEnd={(e) => this.handleTouchEnd(e, this.clicked.bind(this))}
+                    onTouchEnd={() => this.handleTouchEnd(e, this.clicked.bind(this))}
 
                 />
             )

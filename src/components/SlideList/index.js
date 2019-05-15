@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import SuperComponent from '../SuperComponent';
 import './index.less';
 import SlideListT from './SlideList.js';
-import {Answer} from '../Answer';
+import Answer from '../Answer';
 
 const prefixCls="ai-sl";
 

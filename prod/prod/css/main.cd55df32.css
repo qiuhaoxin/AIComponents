@@ -1,0 +1,99 @@
+*,
+div {
+  padding: 0;
+  margin: 0;
+}
+.index_content_2m_OL {
+  margin: 50px;
+}
+.index_ai-srcs-wrapper_2fAX7 {
+  box-sizing: border-box;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  box-shadow: 0 3px 12px 0 #D6E2EF;
+  border-radius: 10px;
+  background: no-repeat bottom right;
+}
+.index_ai-srcs-wrapper_2fAX7 .index_ai-srcs-title_3yx2_ {
+  padding-left: 5px;
+  font-size: 16px;
+  margin-bottom: 11px;
+  color: #2A2A30;
+}
+.index_ai-srcs-wrapper_2fAX7 .index_ai-srcs-list_1U5Cu {
+  font-size: 14px;
+}
+.index_ai-srcs-wrapper_2fAX7 .index_ai-srcs-list_1U5Cu ul {
+  list-style: none;
+}
+.index_ai-srcs-wrapper_2fAX7 .index_ai-srcs-list_1U5Cu ul li {
+  margin-bottom: 10px;
+  color: #666666;
+}
+.index_ai-answer-wrapper_34ddV {
+  background: #FFFFFF;
+  box-shadow: 0 0 8px 0 #C3D3E4;
+  border-radius: 0px 20px 20px 20px;
+  font-family: PingFangSC-Regular;
+  font-size: 15px;
+  color: #333;
+  line-height: 15px;
+  display: inline-flex;
+  padding: 12px 12px 13px 16px;
+}
+.index_ai-wt2-wrapper_2K7uA {
+  display: inline-flex;
+}
+.index_ai-wt2-wrapper_2K7uA .index_ai-wt2-loading_jlw-v {
+  position: relative;
+}
+.index_ai-wt2-wrapper_2K7uA .index_ai-wt2-loading_jlw-v,
+.index_ai-wt2-wrapper_2K7uA .index_ai-wt2-loading1_zrb-C,
+.index_ai-wt2-wrapper_2K7uA .index_ai-wt2-loading2_3z8WE {
+  width: 8px;
+  height: 8px;
+  background: #4A90F3;
+  border-radius: 50%;
+  -webkit-animation: index_loading_H5Ppu 0.88s infinite linear;
+  animation: index_loading_H5Ppu 0.88s infinite linear;
+  margin: 0 4px;
+}
+.index_ai-wt2-wrapper_2K7uA .index_ai-wt2-loading1_zrb-C {
+  -webkit-animation-delay: 0.44s;
+  animation-delay: 0.44s;
+}
+.index_ai-wt2-wrapper_2K7uA .index_ai-wt2-loading2_3z8WE {
+  -webkit-animation-delay: 0.88s;
+  animation-delay: 0.88s;
+}
+@key-frames loading {
+  0% {
+    transform: scale(0.75);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.75);
+    opacity: 0.4;
+  }
+}
+@-webkit-keyframes index_loading_H5Ppu {
+  0% {
+    transform: scale(0.75);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.75);
+    opacity: 0.4;
+  }
+}
+
+/*# sourceMappingURL=main.cd55df32.css.map*/
