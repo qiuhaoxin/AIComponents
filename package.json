@@ -14,29 +14,29 @@
   "license": "ISC",
   "dependencies": {
     "@antv/f2": "^3.3.9",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
     "babel-plugin-transform-remove-strict-mode": "0.0.2",
-    "babel-preset-react-app": "^9.0.0",
     "classnames": "^2.2.6",
     "core-js": "^2.6.5",
-    "css-loader": "^1.0.0",
     "immutable": "^3.8.2",
     "less": "^3.8.1",
-    "less-loader": "^4.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.0",
     "react-bodymovin": "^2.0.0",
     "react-dom": "^16.5.0",
     "reactjs-iscroll": "^0.3.2",
-    "style-loader": "^0.23.0",
-    "url-loader": "^1.1.1",
     "webpack": "^4.18.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
-    "chalk": "^2.4.1"
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-react-app": "^9.0.0",
+    "chalk": "^2.4.1",
+    "css-loader": "^2.1.1",
+    "less-loader": "^5.0.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2"
   },
   "files": [
     "dist",

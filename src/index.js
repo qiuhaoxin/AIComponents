@@ -16,7 +16,7 @@ export {default as VoiceReceive} from './components/VoiceReceive';
 
 export {default as TypeIn} from './components/TypeIn';
 
-export {default as Iscroll} from './components/Iscroll';
+// export {default as Iscroll} from './components/Iscroll';
 
 export {default as Input} from './components/Input';
 
@@ -48,7 +48,7 @@ export {default as SlideList} from './components/SlideList';
 
 export {default as VoiceLoading} from './components/VoiceLoading';
 
-export {default as Feedback} from './components/Feedback';
+// export {default as Feedback} from './components/Feedback';
 
 export {default as StarRate} from './components/StarRate';
 

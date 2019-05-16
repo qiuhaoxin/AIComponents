@@ -4,7 +4,7 @@
  */
 
 import React,{Component} from 'react';
-import F2 from '@antv/f2';
+import F2 from '@antv/f2/lib/index-all'
 
 class BarChartCard extends Component{
 	constructor(props){
