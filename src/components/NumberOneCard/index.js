@@ -159,9 +159,12 @@ class NumberOneCard extends Component{
 	renderCardTwo=()=>{
      const {data:{bodyData}}=this.props;
 		 const className=`${prefixCls}-card-two`;
-		 const wrapperStr=bodyData.map(item=>{
-            const liStr=item.map(itemData=>{
+		 const wrapperStr=bodyData.map((item,index)=>{
+		 	let leftStyle=index * 316;
+            leftStyle=leftStyle==0 ? 0 : leftStyle+'px';
+            const style={transform:`translate3d(${leftStyle},0,0)`};
 
+            const liStr=item.map(itemData=>{
             	return <li key={itemData.id}>
                    <div className={`${prefixCls}-key`}>
                        {itemData.key}
@@ -171,8 +174,9 @@ class NumberOneCard extends Component{
                    </div>
             	</li>
             })
-		 	return <ul key={item.id}>
-          {liStr}
+		 	return <ul key={item.id} style={style} ref={el=>this[`wrapper-${index}`]=el} className={`${prefixCls}-body ${prefixCls}-body-${index}`}
+		 	onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} onTouchEnd={this.handleTouchEnd} onTransitionEnd={this.handleTransitionEnd}>
+               {liStr}
 		 	</ul>
 		 })
      return <div className={className}>
@@ -278,7 +282,31 @@ class NumberOneCard extends Component{
           }
   }
 	renderCardThree=()=>{
+	     const {data:{bodyData}}=this.props;
+		 const className=`${prefixCls}-card-three`;
+		 const wrapperStr=bodyData.map((item,index)=>{
+			 	let leftStyle=index * 316;
+	            leftStyle=leftStyle==0 ? 0 : leftStyle+'px';
+	            const style={transform:`translate3d(${leftStyle},0,0)`};
 
+	            const liStr=item.map(itemData=>{
+	            	return <li key={itemData.id}>
+	                   <span className={`${prefixCls}-key`}>
+	                       {itemData.key}
+	                   </span>
+	                   <span className={`${prefixCls}-value`}>
+	                       {itemData.value}
+	                   </span>
+	            	</li>
+	            })
+			 	return <ul key={item.id} style={style} ref={el=>this[`wrapper-${index}`]=el} className={`${prefixCls}-body ${prefixCls}-body-${index}`}
+			 	onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} onTouchEnd={this.handleTouchEnd} onTransitionEnd={this.handleTransitionEnd}>
+	               {liStr}
+			 	</ul>
+		 })
+	     return <div className={className}>
+	        {wrapperStr}
+	     </div>
 	}
 	renderBody=()=>{
          const {data:{cardType}}=this.props;
@@ -307,7 +335,9 @@ class NumberOneCard extends Component{
             [className]:!!className,
       },`${prefixCls}-wrapper`)
   		return <div className={wrapperCls}>
-             <Answer str={desc} style={answerStyle}></Answer>
+             {
+             	desc ? <Answer str={desc} style={answerStyle}></Answer> : null
+             }
              <div className={`${prefixCls}-innerWrapper`}>
                  {
                  	  this.renderTitle()
@@ -327,7 +357,7 @@ class NumberOneCard extends Component{
 }
 
 NumberOneCard.defaultProps={
-
+    
 }
 NumberOneCard.propTypes={
 
