@@ -1,18 +1,49 @@
 
-
-.gp-histogram-title {
+.ai-table-title {
     height: 16px;
     font-size: 16px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(102, 102, 102, 1);
     line-height: 16px;
+    margin-bottom: 20px;
+
     padding: 16px 0 0 0;
+
     display: flex;
     align-items: center;
 }
 
-.gp-histogram-title:before {
+
+
+.ai-table-div-wrapper {
+    padding: 0 16px;
+}
+
+.ai-table-div-wrapper table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.ai-table-div-wrapper table, table tr th, table tr td {
+    border:1px solid rgba(229,229,229,1);
+    padding: 4px;
+
+    height:17px;
+    font-size:12px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height:17px;
+}
+
+.ai-table-div-wrapper  table tr th {
+    color:rgba(153,153,153,1);
+}
+
+
+.ai-table-title:before {
     content: "";
     width: 4px;
     height: 20px;
@@ -20,19 +51,20 @@
     margin-right: 12px;
 }
 
-.gp-histogram-wrapper {
+.ai-table-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
+
     width: 315px;
-    height: 275px;
+    height: 246px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0 2px 8px 0 rgba(214, 226, 239, 1);
     border-radius: 6px;
 }
 
-.gp-histogram-bottom-content {
+.ai-table-bottom-content {
     height: 13px;
     font-size: 10px;
     font-family: PingFangSC-Regular;
@@ -40,7 +72,6 @@
     color: rgba(153, 153, 153, 1);
     line-height: 13px;
     text-align: center;
-
     margin-bottom: 10px;
-
+    margin-top: 16px;
 }

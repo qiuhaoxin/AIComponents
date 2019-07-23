@@ -1,26 +1,27 @@
 
 
-.gp-histogram-title {
+.ai-combine-title {
     height: 16px;
     font-size: 16px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(102, 102, 102, 1);
     line-height: 16px;
+    margin-bottom: 25px;
     padding: 16px 0 0 0;
     display: flex;
     align-items: center;
 }
 
-.gp-histogram-title:before {
-    content: "";
-    width: 4px;
-    height: 20px;
-    background: rgba(69, 152, 240, 1);
+.ai-combine-title:before{
+    content:"";
+    width:4px;
+    height:20px;
+    background:rgba(69,152,240,1);
     margin-right: 12px;
 }
 
-.gp-histogram-wrapper {
+.ai-combine-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -32,7 +33,7 @@
     border-radius: 6px;
 }
 
-.gp-histogram-bottom-content {
+.ai-combine-bottom-content {
     height: 13px;
     font-size: 10px;
     font-family: PingFangSC-Regular;
@@ -40,7 +41,6 @@
     color: rgba(153, 153, 153, 1);
     line-height: 13px;
     text-align: center;
-
     margin-bottom: 10px;
 
 }

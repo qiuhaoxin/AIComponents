@@ -3,8 +3,11 @@ import React, {Component} from 'react'
 import F2 from '@antv/f2/lib/index-all'
 
 import './index.css';
+import ClassNames from 'classnames';
 
 const prefixCls = 'gp-histogram'
+
+const randomId = Math.random().toFixed(12) * 1e12
 
 export default class GroupHistogramCard extends Component {
 
@@ -60,7 +63,7 @@ export default class GroupHistogramCard extends Component {
         });
 
         let chart = new F2.Chart({
-            id: 'mountNode',
+            id: `mountNode-${randomId}`,
             pixelRatio: window.devicePixelRatio
         });
         chart.source(data);
@@ -88,13 +91,17 @@ export default class GroupHistogramCard extends Component {
     }
 
     render() {
+        const {style,className} = this.props
+
         const {title,updateTime} = this.props.data
+        const classNames = ClassNames({[`${className}`]: className,}, `${prefixCls}-wrapper`)
+
         return (
-            <div className={`${prefixCls}-wrapper`}>
+            <div className={classNames} style={style}>
                 <div className={`${prefixCls}-title`}>
                     {title}
                 </div>
-                <canvas id={'mountNode'} width={315} height={215}/>
+                <canvas id={`mountNode-${randomId}`} width={315} height={215}/>
                 <div className={`${prefixCls}-bottom-content`}>数据统计截止：{updateTime}</div>
             </div>
         )

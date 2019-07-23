@@ -8,42 +8,9 @@ import './index.less';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Answer from '../Answer';
-
+import {splitNum,createArrBy} from '../../utils.js';
 const prefixCls=`ai-noc`;
-const data={
-     title:'金蝶中国业绩总览',
-     cardType:'one',
-     bodyData:[
-        {  
-          numberDetail:[
-          	{key:'本年收款',value:'¥123,4万'},
-          	{key:'缺口',value:'¥-34万'},
-          ],
-          radioDetail:[
-            {key:'完成率',value:'60%'},
-          	{key:'同比增长',value:'60%'},   
-          	{key:'云占比',value:'34%'},
-          ]
-        },
-     ],
-     updateTime:'2018.09.01',
-}
-const data2={
-	 title:'金蝶云2月份的续费率',
-     cardType:'two',
-     bodyData:[
-        [{key:'苍穹',value:'50%',id:0},{key:'星空',value:'70%',id:1}],
-     ],
-     updateTime:'2018.09.01',
-}
-const data3={
-	 title:'苍穹客户数量',
-     cardType:'three',
-     bodyData:[
-        [{key:'累计总数',value:'1000家',id:0},{key:'本年新增',value:'400家',id:1},{key:'同比增长',value:'40%',id:2}],
-     ],
-     updateTime:'2018.09.01',
-}
+
 
 class NumberOneCard extends Component{
 	constructor(props){
@@ -54,6 +21,7 @@ class NumberOneCard extends Component{
 	}
 	state={
 		cardData:null,
+		curSelected:0,
 	}
 	componentDidMount(){
 	}
@@ -89,13 +57,14 @@ class NumberOneCard extends Component{
   renderNumberDetail=(numberData)=>{
       const title=this.getNumberTitle(numberData);
       const valueArr=this.getNumberValue(numberData);
+      console.log("valueArr is ",JSON.stringify(valueArr));
       return <div className={`${prefixCls}-number`}>
           <div className={`${prefixCls}-number-title`}>
              {title}
           </div>
           <div className={`${prefixCls}-number-value`}>
              {
-                valueArr.map(item=><span className={`${prefixCls}-value`}>{item}</span>)
+                valueArr.map(item=><span className={`${prefixCls}-value`}>{splitNum(item,3,',')}</span>)
              }
           </div>
       </div>
@@ -127,8 +96,9 @@ class NumberOneCard extends Component{
   }
   renderDecoration=(len)=>{
       let decorationArr=[];
+      const {curSelected}=this.state;
       for(let i=0;i<len;i++){
-          const csn=i==0 ? 'selected' : null;
+          const csn=i==curSelected ? 'selected' : null;
           decorationArr.push(<li key={i} className={csn}></li>)
       }
       return <ul className={`${prefixCls}-decoration`}>
@@ -142,7 +112,9 @@ class NumberOneCard extends Component{
      const len=2;
      const wrapperStr=bodyData.map((item,index)=>{
           const numberData=item.numberDetail;
-          const radioData=item.radioDetail;
+          let radioData=item.radioDetail;
+          radioData=createArrBy(['完成率','同比增长','云占比'],radioData);
+
           let leftStyle=index * 316;
           leftStyle=leftStyle==0 ? 0 : leftStyle+'px';
          const style={transform:`translate3d(${leftStyle},0,0)`};
@@ -246,6 +218,11 @@ class NumberOneCard extends Component{
             this.setTransition('transform .5s');
             this.transform(this.direction * 316);
             this.curPageIdx+=this.direction * -1;
+            //decoration改变
+
+            this.setState({
+              curSelected:this.curPageIdx,
+            })
           }else{
             this.setTransition('transform .5s');
             this.transform(0);
@@ -309,15 +286,16 @@ class NumberOneCard extends Component{
 	     </div>
 	}
 	renderBody=()=>{
-         const {data:{cardType}}=this.props;
-         switch(cardType){
-         	case 'one':
+         const {data:{type}}=this.props;
+         console.log('numberonecard type',type);
+         switch(type){
+         	case 'COMBINED_CARD':
               return this.renderCardOne();
          	break;
-         	case 'two':
+         	case 'VERTICAL_SIMPLE_CARD':
                return this.renderCardTwo();
          	break;
-         	case 'three':
+         	case 'HORIZONTAL_SIMPLE_CARD':
               return this.renderCardThree();
          	break;
          }

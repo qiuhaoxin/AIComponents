@@ -39,7 +39,11 @@
            _this.bindEvent(_this['list-'+index]);
          })
          this.container.appendChild(this.ULWrapper);
-         this.createDecoration();
+         if(this.options.data.length > 1){
+             //只有一页不做decoration
+             this.createDecoration();
+         }
+         
     	},
       //
       createDecoration:function(){
@@ -56,6 +60,7 @@
           this.container.appendChild(decorateUL);
       },
       changeDecoration:function(){
+
           for(let i=0,len=this.options.data.length;i<len;i++){
             if(i==this.curPageIdx){
                this['decoration-'+i].className=this.prefixCls+"-selected";
@@ -126,7 +131,10 @@
             this.setTransition('transform .5s');
             this.transform(this.direction * 315);
             this.curPageIdx+=this.direction * -1;
-            this.changeDecoration();
+            if(this.options.data.length > 1){
+              //只有一页不做滑动
+               this.changeDecoration();
+            }
           }else{
             this.setTransition('transform .5s');
             this.transform(0);

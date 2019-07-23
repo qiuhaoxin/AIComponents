@@ -15,7 +15,7 @@ class FramePage extends Component{
 			   {id:3,value:[{id:1,value:'财务收款3'},{id:2,value:'应收账款3'},{id:3,value:'营业收入3'},{id:4,value:'现金3'},{id:5,value:'利润总额3'}]},
 			   {id:4,value:[{id:1,value:'财务收款4'},{id:2,value:'应收账款4'},{id:3,value:'营业收入4'},{id:4,value:'现金4'},{id:5,value:'利润总额4'}]},
 			   {id:5,value:[{id:1,value:'财务收款5'},{id:2,value:'应收账款5'},{id:3,value:'营业收入5'},{id:4,value:'现金5'},{id:5,value:'利润总额5'}]},
-			];
+		];
 	}
 	state={
        url:'',

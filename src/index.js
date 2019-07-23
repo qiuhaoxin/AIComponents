@@ -48,7 +48,6 @@ export {default as SlideList} from './components/SlideList';
 
 export {default as VoiceLoading} from './components/VoiceLoading';
 
-// export {default as Feedback} from './components/Feedback';
 
 export {default as StarRate} from './components/StarRate';
 
@@ -61,3 +60,15 @@ export {default as BarChartCard} from './components/BarChartCard';
 export {default as GroupHistogramCard} from './components/GroupHistogramCard';
 
 export {default as NumberOneCard} from './components/NumberOneCard';
+
+export {default as AdaptiveCard} from './components/AdaptiveCards';
+
+export {default as HistogramCard} from './components/HistogramCard';
+
+export {default as PieDataCard} from './components/PieDataCard';
+
+export {default as LineDataCard} from './components/LineDataCard';
+
+export {default as CombineDataCard} from './components/CombineDataCard';
+
+export {default as TableDataCard} from './components/TableDataCard';

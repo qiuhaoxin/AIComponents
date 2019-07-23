@@ -22,12 +22,14 @@ class SlideList extends SuperComponent{
        this.isMove=true;
 	}
 	componentDidMount(){
-       const {data}=this.props;
+       const {data,canItemClick}=this.props;
        if(!this.slideList){
          this.slideList=new SlideListT(this.wrappr,{
             data,
          })
-         this.slideList.on('click',this.handleClickItem);
+         if(canItemClick){
+            this.slideList.on('click',this.handleClickItem);
+         }
          this.slideList.on('pageChange',this.handlePageChange);
        }
 	}
@@ -53,9 +55,10 @@ class SlideList extends SuperComponent{
 	}
 }
 SlideList.defaultProps={
-
+    canItemClick:true,
 }
 SlideList.propTypes={
+    canItemClick:PropTypes.bool,//item是否可点击
     onItemClick:PropTypes.func.isRequired,
     onPageChange:PropTypes.func.isRequired,
 }

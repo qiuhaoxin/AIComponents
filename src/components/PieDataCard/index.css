@@ -1,0 +1,48 @@
+.ai-pie-histogram- {
+
+}
+
+.ai-pie-histogram-title {
+    height:16px;
+    font-size:16px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height:16px;
+    padding:  16px 0 0 0;
+    display: flex;
+    align-items:center;
+}
+
+.ai-pie-histogram-title:before{
+    content:"";
+    width:4px;
+    height:20px;
+    background:rgba(69,152,240,1);
+    margin-right: 12px;
+}
+
+
+.ai-pie-histogram-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width:315px;
+    height:255px;
+    background:rgba(255,255,255,1);
+    box-shadow:0 2px 8px 0 rgba(214,226,239,1);
+    border-radius:6px;
+}
+
+.ai-pie-histogram-bottom-content{
+    height:13px;
+    font-size:10px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+    line-height:13px;
+    text-align: center;
+
+    margin-bottom: 10px;
+}
