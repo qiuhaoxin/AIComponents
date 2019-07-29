@@ -1,7 +1,35 @@
 .wrapper{
-	width:80%;margin:auto 10%;
-	& .ac-container{
-		border:1px solid #eee;
-		border-radius: 4px;
+    & .pages{
+		margin-top:8px;
+		height:240px;
+		background-color: #fff;
+		box-shadow: 0 0 8px 0 #D6E2EF;
+		border-radius:8px;
+		overflow:hidden;
+		& > .ai-sl-page{
+			list-style: none;
+			height:200px;
+			position: relative;
+			overflow: hidden;
+			& > li{
+				position:absolute;
+				left:0;
+				top:0;
+				width:100%;
+				& .ac-selectable{
+					height: 28px;
+					line-height: 28px;
+				}
+			}
+		}
+		& .ai-sl-decorate{
+			display:inline-flex;width:100%;padding-bottom: 9px;height: 10px;justify-content: center;list-style: none;align-items: center;
+			& > li.ai-sl-dec{
+				width:5px;height: 5px;background: #d8d8d8;border-radius: 50%;margin-left:5px;
+			}
+			& > li.ai-sl-selected{
+				width:7px;height: 7px;background-image: linear-gradient(39deg, #597CFC 0%, #4598F0 100%);border-radius: 50%;margin-left: 5px;
+			}
+		}
 	}
 }

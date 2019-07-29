@@ -1,19 +1,25 @@
-import React,{Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-class MainPage extends Component{
-	constructor(props){
-		super(props);
-	}
-	render(){
-		return (
+class MainPage extends Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
             <div>
-                  <div>
-                      
-                  </div>
+                <div>
+                    <Link to="/Dialog">Dialog</Link>
+                </div>
+                <div>
+                    <Link to="/ExpandList">ExpandList</Link>
+                </div>
+                <div>
+                    <Link to="/AdaptiveCard">AdaptiveCard</Link>
+                </div>
             </div>
-		)
-	}
+        )
+    }
 }
 
 export default MainPage;
@@ -58,7 +64,7 @@ export default MainPage;
                 <div>
                     <Link to="/Feedback">Feedback</Link>
                 </div>
-                
+
                 <div>
                     <Link to="/voiceLoading">voiceLoading</Link>
                 </div>

@@ -1,37 +1,39 @@
-import {HashRouter,Switch,Route,Link,Redirect} from 'react-router-dom';
-import React,{Component} from 'react';
+import { HashRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
+import React, { Component } from 'react';
 
 import MainPage from '../pages/MainPage/index.js';
 import DialogPage from '../pages/Dialog/index.js';
-import FramePage from '../pages/Frame/index.js';
+// import FramePage from '../pages/Frame/index.js';
 import ExpandListPage from '../pages/ExpandList/index.js';
-
-import NumberCardPage from '../pages/NumberCard/index.js';
-import VoiceReceivePage from '../pages/VoiceReceive/index.js';
-import Iscroll from '../pages/Iscroll/index.js';
-import InputPage from '../pages/input/index.js';
-import RecommendPage from '../pages/Recommend/index.js';
-import Input from '../pages/InputSample/index'
-import DotDymEffectPages from '../pages/DotDymEffectPages/index'
-import FeedbackPages   from '../pages/FeedbackPages/index';
-import VoiceLoadingPage from '../pages/VoiceLoading/index';
-import NumberCardConfigPage from '../pages/NumberCardConfig/index';
-import SingleRecommend from '../pages/SingleRecommend/index';
-import ChartPage from '../pages/Chart/index';
-class Router extends Component{
-    constructor(props){
-    	super(props);
-    }
-    render(){
-      return (
-	       <HashRouter>
-	          <Switch>
-	            <Route exact path="/" component={MainPage}></Route>
-            
-	          </Switch>
-	       </HashRouter>
-      )
-    }
+import AdaptiveCardPage from '../pages/AdaptiveCards/index';
+// import NumberCardPage from '../pages/NumberCard/index.js';
+// import VoiceReceivePage from '../pages/VoiceReceive/index.js';
+// import Iscroll from '../pages/Iscroll/index.js';
+// import InputPage from '../pages/input/index.js';
+// import RecommendPage from '../pages/Recommend/index.js';
+// import Input from '../pages/InputSample/index'
+// import DotDymEffectPages from '../pages/DotDymEffectPages/index'
+// import FeedbackPages   from '../pages/FeedbackPages/index';
+// import VoiceLoadingPage from '../pages/VoiceLoading/index';
+// import NumberCardConfigPage from '../pages/NumberCardConfig/index';
+// import SingleRecommend from '../pages/SingleRecommend/index';
+// import ChartPage from '../pages/Chart/index';
+class Router extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <HashRouter>
+        <Switch>
+          <Route exact path="/" component={MainPage}></Route>
+          <Route path="/Dialog" component={DialogPage} />
+          <Route path="/ExpandList" component={ExpandListPage} />
+          <Route path='/AdaptiveCard' component={AdaptiveCardPage} />
+        </Switch>
+      </HashRouter>
+    )
+  }
 }
 
 export default Router;
