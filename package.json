@@ -1,6 +1,6 @@
 {
   "name": "aicomponents",
-  "version": "4.3.2",
+  "version": "4.4.6",
   "description": "A Web Components Library for AI Chatbot",
   "main": "dist/main.min.js",
   "scripts": {

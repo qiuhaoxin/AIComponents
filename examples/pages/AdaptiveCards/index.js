@@ -14,7 +14,8 @@ class AdaptiveCardPage extends React.Component {
     }
     render() {
         return <div>
-            <AdaptiveCard cardData={multiPage} onExecuteAction={this.handleAction} />
+            <AdaptiveCard style={{ width: 315, marginLeft: 20 }} cardData={multiPage} onExecuteAction={this.handleAction} />
+            <AdaptiveCard style={{ width: 315, marginLeft: 20 }} cardData={tripOne} onExecuteAction={this.handleAction} />
         </div>
     }
 }

@@ -1,16 +1,16 @@
 .wrapper{
     & .pages{
 		margin-top:8px;
-		height:240px;
 		background-color: #fff;
 		box-shadow: 0 0 8px 0 #D6E2EF;
 		border-radius:8px;
 		overflow:hidden;
 		& > .ai-sl-page{
 			list-style: none;
-			height:200px;
 			position: relative;
 			overflow: hidden;
+			display: flex;
+			flex-direction: row;
 			& > li{
 				position:absolute;
 				left:0;
@@ -29,6 +29,15 @@
 			}
 			& > li.ai-sl-selected{
 				width:7px;height: 7px;background-image: linear-gradient(39deg, #597CFC 0%, #4598F0 100%);border-radius: 50%;margin-left: 5px;
+			}
+		}
+		& .ac-actionSet{
+			& > button{
+				border:none;
+				padding:6px 12px;
+				background: #4598f0;
+				border-radius: 8px;
+				color:#fff;
 			}
 		}
 	}

@@ -7,6 +7,7 @@
     function CardFactory(container, AdaptiveCards, options) {
         this.container = typeof container === 'string' ? doc.getElementById(container) : container;
         this.options = {};
+        this.li_wrapper = {};
         for (let key in options) {
             this.options[key] = options[key];
         }
@@ -21,7 +22,6 @@
         constructor: CardFactory,
         prefixCls: 'ai-sl',
         adaptiveCard: null,
-        li_wrapper: [],
         sourceTarget: null,
         distTarget: null,
         direction: 0,
@@ -47,8 +47,8 @@
             var cardData = this.options.cardData;
             var _this = this;
             if (!cardData) return null;
-            var UI_WRAPPER = doc.createElement('UL');
-            UI_WRAPPER.className = this.prefixCls + "-page";
+            this.UI_WRAPPER = doc.createElement('UL');
+            this.UI_WRAPPER.className = this.prefixCls + "-page";
             cardData.forEach(function (item, index) {
 
                 _this.li_wrapper[index] = doc.createElement('LI');
@@ -56,9 +56,9 @@
                 if (index != 0) {
                     _this.li_wrapper[index].style.cssText = ";transform:translate(" + (index * 100) + "%,0)";
                 }
-                UI_WRAPPER.appendChild(_this.li_wrapper[index]);
+                _this.UI_WRAPPER.appendChild(_this.li_wrapper[index]);
             })
-            this.container.appendChild(UI_WRAPPER);
+            this.container.appendChild(this.UI_WRAPPER);
             if (this.options.cardData.length > 1) {
                 this.createDecoration();
             }
@@ -100,6 +100,15 @@
                 _this.adaptiveCard.parse(itemData);
                 _this.adaptiveCard.render(_this.li_wrapper[index]);
             })
+            this.getChildMaxHeight();
+        },
+        getChildMaxHeight: function () {
+            let maxH = 0;
+            for (let key in this.li_wrapper) {
+                var height = this.li_wrapper[key].clientHeight;
+                maxH = Math.max(maxH, height);
+            }
+            this.UI_WRAPPER.style.height = maxH + 'px';
         },
         bindEvent: function () {
             this._bind(this.container, 'touchstart', this);

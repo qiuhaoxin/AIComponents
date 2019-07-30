@@ -1,10 +1,11 @@
 export const adaptiveCardConfig = {
+
     "spacing": {
         "small": 4,
         "default": 8,
-        "medium": 20,
-        "large": 32,
-        "extraLarge": 44,
+        "medium": 16,
+        "large": 30,
+        "extraLarge": 40,
         "padding": 16
 
     },
@@ -452,8 +453,8 @@ export const adaptiveCardConfig = {
 
         "maxActions": 5,
 
-        "spacing": "padding",
-        "buttonSpacing": 12,
+        "spacing": "default",
+        "buttonSpacing": 8,
 
         "showCard": {
 
@@ -493,7 +494,7 @@ export const adaptiveCardConfig = {
 
             "isSubtle": false,
 
-            "weight": "bolder",
+            "weight": "default",
 
             "wrap": true,
 
@@ -515,7 +516,7 @@ export const adaptiveCardConfig = {
 
         },
 
-        "spacing": 10
+        "spacing": 20
 
     }
 

@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import './index.less';
 import PropTypes from 'prop-types';
 import * as AdaptiveCards from "adaptivecards";
-import { hostConfig } from './hostConfig';
+import { adaptiveCardConfig } from './hostConfig';
 import Answer from '../Answer/index';
 import CardFactory from './cardFactory';
 
@@ -21,7 +21,7 @@ class AdaptiveCard extends Component {
 		const { cardData, onExecuteAction } = this.props;
 		if (!this.cardFactory) {
 			let options = {
-				hostConfig,
+				hostConfig: adaptiveCardConfig,
 				cardData,
 				onExecuteAction,
 			}
@@ -36,7 +36,7 @@ class AdaptiveCard extends Component {
 		if (!this.adaptiveCard) {
 			this.adaptiveCard = new AdaptiveCards.AdaptiveCard();
 			if (hostConfig) {
-				this.adaptiveCard.hostConfig = new AdaptiveCards.HostConfig(hostConfig)
+				this.adaptiveCard.hostConfig = new AdaptiveCards.HostConfig(adaptiveCardConfig)
 			}
 			if (onExecuteAction) {
 				this.adaptiveCard.onExecuteAction = function (action) {
