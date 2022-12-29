@@ -25,7 +25,7 @@
     "react-bodymovin": "^2.0.0",
     "react-dom": "^16.5.0",
     "reactjs-iscroll": "^0.3.2",
-    "webpack": "^4.18.0"
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -35,10 +35,10 @@
     "babel-loader": "^8.0.6",
     "babel-preset-react-app": "^9.0.0",
     "chalk": "^2.4.1",
-    "css-loader": "^2.1.1",
-    "less-loader": "^5.0.0",
-    "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2"
+    "css-loader": "^6.7.3",
+    "less-loader": "^11.1.0",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1"
   },
   "files": [
     "dist",
